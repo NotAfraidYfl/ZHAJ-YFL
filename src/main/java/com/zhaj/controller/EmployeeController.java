@@ -78,11 +78,17 @@ public class EmployeeController {
 		}
 		return jsonModel;
 	}
-	@RequestMapping("createAndEditEempView")
-	public String createEmp(){
+	@RequestMapping("createEempView")
+	public String createEmp(Employee emp){
 		
 		
-		return null;
+		return "EmployeeViews/empEditAndEdit.jsp";
+	}
+	@RequestMapping("editEempView")
+	public String editEmp(Employee emp){
+		
+		
+		return "EmployeeViews/empEditAndEdit.jsp";
 	}
 	
 	
