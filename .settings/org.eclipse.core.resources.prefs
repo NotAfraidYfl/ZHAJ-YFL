@@ -1,0 +1,5 @@
+eclipse.preferences.version=1
+encoding//src/main/webapp/WEB-INF/views/DepartmentViews/departmentList.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/EmployeeViews/employeesList.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/HomePageViews/login.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/header/header.jsp=UTF-8

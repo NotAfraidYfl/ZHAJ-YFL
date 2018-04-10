@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans    
+                        http://www.springframework.org/schema/beans/spring-beans-3.1.xsd    
+                        http://www.springframework.org/schema/context    
+                        http://www.springframework.org/schema/context/spring-context-3.1.xsd    
+                        http://www.springframework.org/schema/mvc    
+                        http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+                        http://www.springframework.org/schema/tx
+				        http://www.springframework.org/schema/tx/spring-tx.xsd
+				        http://www.springframework.org/schema/aop
+				        http://www.springframework.org/schema/aop/spring-aop.xsd">
+	
+	<context:component-scan base-package="com.zhaj">
+	<!-- 过滤  除了controller之外的包 -->
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+	</context:component-scan>
+	<!-- 1.spring的配置文件，这里主要配置和业务逻辑有关的 -->
+	<!-- 数据源、事物控制 -->
+	<context:property-placeholder location="classpath:dbconfig.properties"/>	
+	<bean id="pooldataSource" class="org.apache.commons.dbcp2.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/zhaj"/>
+        <property name="username" value="root"/>
+        <property name="password" value="root"/>
+        <property name="initialSize" value="10" />
+        <property name="maxTotal" value="100" />
+        <property name="maxWaitMillis" value="5000" />
+	</bean>
+	<!-- 2.配置和mybatis的整合 -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<!-- 配置mybatis全局配置文件的位置 -->
+		<property name="configLocation" value="classpath:mybatis-config.xml"></property>
+		<property name="dataSource" ref="pooldataSource"></property>
+		<!-- 制定mybatis的mapper文件的位置 -->
+		<property name="mapperLocations" value="classpath:mapper/*.xml"></property>
+	</bean>
+	
+	<!-- 3.配置扫描器 ,将mybatis的接口实现加到IOC容器中-->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<!-- 扫描所有的dao接口的实现，加入到ioc容器中 -->
+		<property name="basePackage" value="com.zhaj.dao"></property>
+	</bean>
+	
+	<!-- 4.事物控制的配置 -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<!-- 控制住数据源 -->
+		<property name="dataSource" ref="pooldataSource"></property>
+	</bean>
+	
+	<!-- 5.开启基于注解的事物，使用xml配置形式的事务（必要主要的都是使用配置式） -->
+	<aop:config>
+		<!-- 切入点表达式 -->
+        <aop:pointcut id="ssmServiceMethods" expression="execution(* com.zhaj.service..*.*(..))" />
+		<!-- 配置事务增强 -->
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="ssmServiceMethods" />
+    </aop:config>
+    
+    <!-- 6.切入面 ，配置事务增强，事务如何切入-->
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <!-- 数据读取 -->
+            <tx:method name="select*" propagation="SUPPORTS" read-only="true" />
+            <tx:method name="get*" propagation="SUPPORTS" read-only="true" />
+            <tx:method name="find*" propagation="SUPPORTS" read-only="true" />
+            <tx:method name="query*" propagation="SUPPORTS" read-only="true" />
+            <tx:method name="list*" propagation="SUPPORTS" read-only="true" />
+            <!-- 非查询操作 -->
+            <tx:method name="*" propagation="REQUIRED" />
+        </tx:attributes>
+    </tx:advice>
+	
+	<!-- 7.配置一个可以执行批量的sqlsession -->
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"></constructor-arg>
+		<constructor-arg name="executorType" value="BATCH"></constructor-arg>
+	</bean>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</beans>  

@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+  version="2.0">
+    
+  <description>JSTL 1.1 functions library</description>
+  <display-name>JSTL functions sys</display-name>
+  <tlib-version>1.1</tlib-version>
+  <short-name>fns</short-name>
+  <uri>http://java.sun.com/jsp/jstl/functionss</uri>
+
+  <!-- DictUtils -->
+  <function>
+    <description>获取字典类型标签</description>
+    <name>getDictTypeLabel</name>
+    <function-class>com.zhph.common.SysCodeUtils</function-class>
+    <function-signature>java.lang.String getDictTypeLabel(java.lang.String, java.lang.String)</function-signature>
+    <example>${fns:getDictTypeLabel(value, defaultValue)}</example>  
+  </function>
+  <!-- DictUtils -->
+  <function>
+    <description>获取字典VO对象</description>
+    <name>getDictByTableKey</name>
+    <function-class>com.zhph.common.SysCodeUtils</function-class>
+    <function-signature>com.zhph.vo.String getDictByTableKey(java.lang.String, java.lang.String)</function-signature>
+    <example>${fns:getDictByTableKey(type, tableKey)}</example>  
+  </function>
+  <function>
+    <description>获取字典标签</description>
+    <name>getDictLabel</name>
+    <function-class>com.zhph.common.SysCodeUtils</function-class>
+    <function-signature>java.lang.String getDictLabel(java.lang.String, java.lang.String, java.lang.String)</function-signature>
+    <example>${fns:getDictLabel(value, type, defaultValue)}</example>  
+  </function>
+  
+  <function>
+  	<description>根据id获取lable的值</description>
+  	<name>getSysCode</name>
+  	<function-class>com.zhph.common.SysCodeUtils</function-class>
+  	<function-signature>java.lang.String getSysCode(java.lang.String, java.lang.String)</function-signature>
+  	<example>${fns:getSysCode(type,tableKey)}</example>
+  </function>
+  
+  
+  <function>
+    <description>获取字典标签(多个)</description>
+    <name>getDictLabels</name>
+    <function-class>com.zhph.common.SysCodeUtils</function-class>
+    <function-signature>java.lang.String getDictLabels(java.lang.String, java.lang.String, java.lang.String)</function-signature>
+    <example>${fns:getDictLabels(values, type, defaultValue)}</example>  
+  </function>
+
+  <function>
+    <description>获取字典值</description>
+    <name>getDictValue</name>
+    <function-class>com.zhph.common.SysCodeUtils</function-class>
+    <function-signature>java.lang.String getDictValue(java.lang.String, java.lang.String, java.lang.String)</function-signature>
+    <example>${fns:getDictValue(label, type, defaultValue)}</example>  
+  </function>
+  
+  <function>
+    <description>获取字典对象列表</description>
+    <name>getDictList</name>
+    <function-class>com.zhph.common.SysCodeUtils</function-class>
+    <function-signature>java.util.List getDictList(java.lang.String)</function-signature>
+    <example>${fns:getDictList(type)}</example>  
+  </function>
+  
+  <function>
+    <description>获取字典对象列表</description>
+    <name>getDictListJson</name>
+    <function-class>com.zhph.common.SysCodeUtils</function-class>
+    <function-signature>java.lang.String getDictListJson(java.lang.String)</function-signature>
+    <example>${fns:getDictListJson(type)}</example>  
+  </function>
+  
+  <function>
+    <description>获取对象的属性值</description>
+    <name>getValue</name>
+    <function-class>com.zhph.common.SysCodeUtils</function-class>
+    <function-signature>java.lang.String getValue(java.lang.Object, java.lang.String)</function-signature>
+    <example>${fns:getValue(obj, name)}</example>  
+  </function>
+  
+  <!-- StringUtils -->
+  <function>
+    <description>从后边开始截取字符串</description>
+    <name>substringAfterLast</name>
+    <function-class>org.apache.commons.lang3.StringUtils</function-class>
+    <function-signature>java.lang.String substringAfterLast(java.lang.String, java.lang.String)</function-signature>
+    <example>${fns:substringAfterLast(str,separator)}</example>  
+  </function>
+  <function>
+    <description>判断字符串是否以某某开头</description>
+    <name>startsWith</name>
+    <function-class>org.apache.commons.lang3.StringUtils</function-class>
+    <function-signature>boolean startsWith(java.lang.CharSequence, java.lang.CharSequence)</function-signature>
+    <example>${fns:startsWith(str,prefix)}</example> 
+  </function>
+  <function>
+    <description>判断字符串是否以某某结尾</description>
+    <name>endsWith</name>
+    <function-class>org.apache.commons.lang3.StringUtils</function-class>
+    <function-signature>boolean endsWith(java.lang.CharSequence, java.lang.CharSequence)</function-signature>
+    <example>${fns:endsWith(str,suffix)}</example> 
+  </function>
+  
+  <!-- DateUtils -->
+  <function>
+    <description>获取当前日期</description>
+    <name>getDate</name>
+    <function-class>com.zhph.util.DateUtils</function-class>
+    <function-signature>java.lang.String getDate(java.lang.String)</function-signature>
+    <example>${fns:getDate(pattern)}</example>  
+  </function>
+  <function>
+    <description>获取过去的天数</description>
+    <name>pastDays</name>
+    <function-class>com.zhph.util.DateUtils</function-class>
+    <function-signature>long pastDays(java.util.Date)</function-signature>
+    <example>${fns:pastDays(date)}</example>  
+  </function>
+  <function>
+    <description>将日期对象Date转为标准格式字符串yyyy-mm-dd hh:mm:ss显示</description>
+    <name>formatDateTime</name>
+    <function-class>com.zhph.util.DateUtils</function-class>
+    <function-signature>java.lang.String formatDateTime(java.util.Date)</function-signature>
+    <example>${fns:formatDateTime(date)}</example>  
+  </function>
+</taglib>

@@ -1,0 +1,17 @@
+@CHARSET "UTF-8";
+
+#searchForm {
+	background: #ffffff;
+	padding: 15px;
+	border: 1px solid #cccccc;
+	margin-bottom: 10px;
+	display: -webkit-box;
+}
+
+#searchForm lable {
+	font-weight: normal;
+}
+
+.body-div {
+	margin: 15px 15px;
+}
