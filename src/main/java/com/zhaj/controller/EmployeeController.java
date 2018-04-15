@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -78,17 +79,55 @@ public class EmployeeController {
 		}
 		return jsonModel;
 	}
+	/**
+	 * 新增单个员工
+	 * @param emp
+	 * @return
+	 */
 	@RequestMapping("createEempView")
-	public String createEmp(Employee emp){
-		
-		
-		return "EmployeeViews/empEditAndEdit.jsp";
+	public String createEmpView(){
+		return "EmployeeViews/empEditAndEdit";
 	}
+	public JsonModel createEmp(Employee emp){
+		JsonModel jsonModel=new JsonModel();
+		if (StringUtils.isEmpty(emp)) {
+			jsonModel.setCode(-1);
+			jsonModel.setInfo("员工对象不能为空！");
+		} else {
+			try {
+				employeeService.insertEmp(emp);
+				jsonModel.setInfo("新增成功！");
+				jsonModel.setCode(0);
+			} catch (Exception e) {
+				jsonModel.setCode(-1);
+				jsonModel.setInfo("出现异常，请检查代码！！");
+			}
+		}
+		return jsonModel;
+	}
+	
+	/**
+	 * 修改单个员工数据
+	 * @param emp
+	 * @return
+	 */
 	@RequestMapping("editEempView")
 	public String editEmp(Employee emp){
+		String empId= emp.getdId();
 		
 		
-		return "EmployeeViews/empEditAndEdit.jsp";
+		return "EmployeeViews/empEditAndEdit";
+	}
+	
+	/**
+	 * 查看单个员工数据
+	 * @param empId
+	 * @return
+	 */
+	public String viewOfEmp(String empId){
+		
+		
+		return "EmployeeViews/empEditAndEdit";
 	}
 	
 	

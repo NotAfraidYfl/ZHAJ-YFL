@@ -46,7 +46,6 @@ public class MvcTest {
 	public void testPage() throws Exception {
 		// perform模拟发送请求,并且拿到返回值
 		MvcResult andReturn = mocMvc.perform(MockMvcRequestBuilders.get("/empList").param("pageNum", "2")).andReturn();
-//
 		// 请求成功之后，请求域中会有pageInfo,我们可以取出Pageinfo进行验证
 		MockHttpServletRequest requst = andReturn.getRequest();
 		PageInfo pi = (PageInfo) requst.getAttribute("pageInfo");

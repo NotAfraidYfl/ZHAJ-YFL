@@ -18,7 +18,7 @@ public interface EmployeeMapper {
 
     List<Employee> selectByExample(EmployeeExample example);
 
-    Employee selectByPrimaryKey(Integer empId);
+    Employee selectByPrimaryKey(String empId);
     
 //    带部门的条件查询
     List<Employee> selectByExampleWithDept(EmployeeExample example);
@@ -32,4 +32,6 @@ public interface EmployeeMapper {
     int updateByPrimaryKeySelective(Employee record);
 
     int updateByPrimaryKey(Employee record);
+    
+    
 }

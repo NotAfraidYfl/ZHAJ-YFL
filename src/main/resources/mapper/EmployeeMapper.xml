@@ -2,17 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zhaj.dao.EmployeeMapper">
 	<resultMap id="BaseResultMap" type="com.zhaj.bean.Employee">
-		<id column="emp_id" jdbcType="INTEGER" property="empId" />
+		<id column="emp_id" jdbcType="VARCHAR" property="empId" />
 		<result column="emp_name" jdbcType="VARCHAR" property="empName" />
-		<result column="emp_gender" jdbcType="CHAR" property="empGender" />
+		<result column="emp_tel" jdbcType="VARCHAR" property="empTel" />
+		<result column="emp_gender" jdbcType="INTEGER" property="empGender" />
 		<result column="emp_email" jdbcType="VARCHAR" property="empEmail" />
 		<result column="d_id" jdbcType="INTEGER" property="dId" />
 	</resultMap>
 
 	<resultMap id="BaseResltMapWithDept" type="com.zhaj.bean.Employee">
-		<id column="emp_id" jdbcType="INTEGER" property="empId" />
+		<id column="emp_id" jdbcType="VARCHAR" property="empId" />
 		<result column="emp_name" jdbcType="VARCHAR" property="empName" />
-		<result column="emp_gender" jdbcType="CHAR" property="empGender" />
+		<result column="emp_tel" jdbcType="VARCHAR" property="empTel" />
+		<result column="emp_gender" jdbcType="INTEGER" property="empGender" />
 		<result column="emp_email" jdbcType="VARCHAR" property="empEmail" />
 		<result column="d_id" jdbcType="INTEGER" property="dId" />
 		<!-- 关联一个部门信息 -->
@@ -88,11 +90,11 @@
 		</where>
 	</sql>
 	<sql id="Base_Column_List">
-		emp_id, emp_name, emp_gender, emp_email, d_id
+		emp_id, emp_name, emp_tel, emp_gender, emp_email, d_id
 	</sql>
 	<sql id="withDept_Colum_list">
-		e.emp_id, e.emp_name, e.emp_gender, e.emp_email, e.d_id
-		,d.dept_id , d.dept_name
+		e.emp_id, e.emp_name,e.emp_tel, e.emp_gender, e.emp_email,
+		e.d_id,d.dept_id , d.dept_name
 	</sql>
 	<!-- 带条件查询 -->
 	<!-- 带条件查出部门 -->
@@ -121,7 +123,7 @@
 		from tb_emp e
 		LEFT JOIN tb_dept d ON e.d_id = d.dept_id
 		where emp_id =
-		#{empId,jdbcType=INTEGER}
+		#{empId,jdbcType=VARCHAR}
 	</select>
 	<select id="selectByExample" parameterType="com.zhaj.bean.EmployeeExample"
 		resultMap="BaseResultMap">
@@ -139,12 +141,12 @@
 		</if>
 	</select>
 	<!-- 通过主键查询 -->
-	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+	<select id="selectByPrimaryKey" parameterType="string"
 		resultMap="BaseResultMap">
 		select
 		<include refid="Base_Column_List" />
 		from tb_emp
-		where emp_id = #{empId,jdbcType=INTEGER}
+		where emp_id = #{empId,jdbcType=VARCHAR}
 	</select>
 	<delete id="deleteByPrimaryKey" parameterType="string">
 		delete from tb_emp
@@ -158,11 +160,11 @@
 	</delete>
 	<insert id="insert" parameterType="com.zhaj.bean.Employee">
 		insert into tb_emp (emp_id,
-		emp_name, emp_gender,
+		emp_name,emp_tel, emp_gender,
 		emp_email, d_id)
 		values
-		(#{empId,jdbcType=INTEGER}, #{empName,jdbcType=VARCHAR},
-		#{empGender,jdbcType=CHAR},
+		(#{empId,jdbcType=VARCHAR}, #{empName,jdbcType=VARCHAR},
+		#{empGender,jdbcType=INTEGER},
 		#{empEmail,jdbcType=VARCHAR},
 		#{dId,jdbcType=INTEGER})
 	</insert>
@@ -174,6 +176,9 @@
 			</if>
 			<if test="empName != null">
 				emp_name,
+			</if>
+			<if test="empTel != null">
+				emp_tel,
 			</if>
 			<if test="empGender != null">
 				emp_gender,
@@ -192,8 +197,11 @@
 			<if test="empName != null">
 				#{empName,jdbcType=VARCHAR},
 			</if>
+			<if test="empTel != null">
+				#{empTel,jdbcType=VARCHAR},
+			</if>
 			<if test="empGender != null">
-				#{empGender,jdbcType=CHAR},
+				#{empGender,jdbcType=INTEGER},
 			</if>
 			<if test="empEmail != null">
 				#{empEmail,jdbcType=VARCHAR},
@@ -214,13 +222,16 @@
 		update tb_emp
 		<set>
 			<if test="record.empId != null">
-				emp_id = #{record.empId,jdbcType=INTEGER},
+				emp_id = #{record.empId,jdbcType=VARCHAR},
 			</if>
 			<if test="record.empName != null">
 				emp_name = #{record.empName,jdbcType=VARCHAR},
 			</if>
+			<if test="record.empTel != null">
+				emp_tel = #{record.empTel,jdbcType=VARCHAR},
+			</if>
 			<if test="record.empGender != null">
-				emp_gender = #{record.empGender,jdbcType=CHAR},
+				emp_gender = #{record.empGender,jdbcType=INTEGER},
 			</if>
 			<if test="record.empEmail != null">
 				emp_email = #{record.empEmail,jdbcType=VARCHAR},
@@ -235,11 +246,13 @@
 	</update>
 	<update id="updateByExample" parameterType="map">
 		update tb_emp
-		set emp_id = #{record.empId,jdbcType=INTEGER},
+		set emp_id = #{record.empId,jdbcType=VARCHAR},
 		emp_name =
 		#{record.empName,jdbcType=VARCHAR},
+		emp_tel =
+		#{record.empTel,jdbcType=VARCHAR},
 		emp_gender =
-		#{record.empGender,jdbcType=CHAR},
+		#{record.empGender,jdbcType=INTEGER},
 		emp_email =
 		#{record.empEmail,jdbcType=VARCHAR},
 		d_id =
@@ -255,25 +268,30 @@
 				emp_name = #{empName,jdbcType=VARCHAR},
 			</if>
 			<if test="empGender != null">
-				emp_gender = #{empGender,jdbcType=CHAR},
+				emp_gender = #{empGender,jdbcType=INTEGER},
 			</if>
 			<if test="empEmail != null">
 				emp_email = #{empEmail,jdbcType=VARCHAR},
 			</if>
 			<if test="dId != null">
-				d_id = #{dId,jdbcType=INTEGER},
+				d_id = #{dId,jdbcType=VARCHAR},
+			</if>
+			<if test="empTel != null">
+				emp_tel = #{empTel,jdbcType=VARCHAR},
 			</if>
 		</set>
-		where emp_id = #{empId,jdbcType=INTEGER}
+		where emp_id = #{empId,jdbcType=VARCHAR}
 	</update>
 	<update id="updateByPrimaryKey" parameterType="com.zhaj.bean.Employee">
 		update tb_emp
 		set
 		emp_name = #{empName,jdbcType=VARCHAR},
-		emp_gender =
-		#{empGender,jdbcType=CHAR},
+		emp_tel =
+		#{empTel,jdbcType=VARCHAR},
+		emp_gender =#{empGender,jdbcType=INTEGER},
 		emp_email = #{empEmail,jdbcType=VARCHAR},
-		d_id = #{dId,jdbcType=INTEGER}
-		where emp_id = #{empId,jdbcType=INTEGER}
+		d_id =
+		#{dId,jdbcType=INTEGER}
+		where emp_id = #{empId,jdbcType=VARCHAR}
 	</update>
 </mapper>

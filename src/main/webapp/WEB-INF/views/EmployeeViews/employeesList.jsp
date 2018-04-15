@@ -21,9 +21,10 @@
 								value="${company.name}">
 						</div>
 						<div class="form-inline col-xs-3">
-							<label class="text-right">所属部门：</label> <input name="name"
-								type="text" class=" form-control" placeholder="请输入公司名称"
-								value="${company.name}">
+							<label for="exampleInputFile">所属部门：</label> <select
+								class="form-control">
+								<option value=""></option>
+							</select>
 						</div>
 						<div class="form-inline col-xs-3">
 							<label class="text-right">员工ID：</label> <input name="name"
@@ -54,6 +55,7 @@
 						<tr>
 							<th class="text-center">序号</th>
 							<th class="text-center">姓名</th>
+							<th class="text-center">电话</th>
 							<th class="text-center">性别</th>
 							<th class="text-center">邮箱</th>
 							<th class="text-center">部门</th>
@@ -100,9 +102,10 @@
 		function formatOneRow(i, row) {
 			return "<tr><td class='text-center'>" + i + "</td>"
 					+ "<td class='text-center'>" + row.empName + "</td>"
+					+ "<td class='text-center'>" + row.empTel + "</td>"
 					+ "<td class='text-center'>" + formatGender(row.empGender)
 					+ "</td>" + "<td class='text-center'>" + row.empEmail
-					+ "</td>" + "<td class='text-center'>" + row.deptName
+					+ "</td>" + "<td class='text-center'>" + row.department.deptName
 					+ "</td>" + "<td class='text-center'><a empId=" + row.empId
 					+ " onclick='deletEmp(this)'>删除</a>" + "</td>" + "</tr>"
 
@@ -134,7 +137,8 @@
 		}
 		//新增员工
 		function createEmp() {
-			open("新增员工", "#", [ '900px', '600px' ], function(index, layero) {
+			open("新增员工", "${ctx}/employee/createEempView.do", [ '900px',
+					'600px' ], function(index, layero) {
 
 			});
 		}

@@ -41,4 +41,8 @@ public class EmployeeService {
 		employeeMapper.insertSelective(employee);
 	}
 
+	public Employee selectOneEmp(String empId) {
+		return employeeMapper.selectByPrimaryKey(empId);
+	}
+
 }

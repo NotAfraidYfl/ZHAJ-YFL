@@ -5,6 +5,8 @@ public class Employee {
 	private String empId;
 	// 员工姓名
 	private String empName;
+	// 员工电话
+	private String empTel;
 	// 员工性别 1男，0女
 	private int empGender;
 	// 员工邮箱
@@ -15,10 +17,11 @@ public class Employee {
 	private Department department;
 
 	// 生成有参构造器
-	public Employee(String empId, String empName, int empGender, String empEmail, String dId) {
+	public Employee(String empId, String empName, String empTel, int empGender, String empEmail, String dId) {
 		super();
 		this.empId = empId;
 		this.empName = empName;
+		this.empTel = empTel;
 		this.empGender = empGender;
 		this.empEmail = empEmail;
 		this.dId = dId;
@@ -51,6 +54,14 @@ public class Employee {
 
 	public void setEmpName(String empName) {
 		this.empName = empName == null ? null : empName.trim();
+	}
+
+	public String getEmpTel() {
+		return empTel;
+	}
+
+	public void setEmpTel(String empTel) {
+		this.empTel = empTel;
 	}
 
 	public int getEmpGender() {
