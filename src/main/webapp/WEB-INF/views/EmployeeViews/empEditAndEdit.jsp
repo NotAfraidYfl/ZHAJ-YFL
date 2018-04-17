@@ -5,34 +5,41 @@
 <html>
 <head>
 <%@include file="/WEB-INF/views/common/common.jsp"%>
-<title>员工列表页面</title>
+<title>查看员工列表页面</title>
 </head>
 <body>
 	<div class="body-div">
 		<div class="col-xs-12">
-			<form>
+			<form action="${ctx}/employee/updateOne" id="singleEmp">
 				<div class="form-group">
 					<label for="exampleInputEmail1">员工姓名：</label> <input type="text"
-						class="form-control" id="" placeholder="请输入员工姓名"
+						class="form-control" id="" name="empName" placeholder="请输入员工姓名"
 						value="${emp.empName}">
 				</div>
 				<div class="form-group">
+					<label for="exampleInputEmail1">员工手机：</label> <input type="text"
+						class="form-control" id="" name="empTel" placeholder="请输入员工姓名"
+						value="${emp.empTel}">
+				</div>
+				<div class="form-group">
 					<label for="exampleInputPassword1">性别：</label> <input type="text"
-						class="form-control" id="" placeholder="请输入员工性别"
+						class="form-control" id="" name="empGender" placeholder="请输入员工性别"
 						value="<c:if test='${emp.empGender==1}'>男</c:if><c:if test='${emp.empGender==0}'>女</c:if>">
 				</div>
 				<div class="form-group">
 					<label for="exampleInputFile">邮箱：</label> <input type="email"
-						class="form-control" id="" placeholder="请输入员工邮箱" value="${emp.empEmail}">
+						class="form-control" id="" name="empEmail" placeholder="请输入员工邮箱" value="${emp.empEmail}">
 				</div>
 				<div class="form-group">
-					<label for="exampleInputFile">所属部门：</label> <select
-						class="form-control">
+					<label for="exampleInputFile">所属部门：</label> 
+					<select	class="form-control" name="dId" id="depSelect">
 						<option></option>
-						<option value=""></option>
 					</select>
 				</div>
-				<button type="submit" class="btn btn-default">Submit</button>
+				<input type="hidden" name="empId" value="${emp.empId}">
+				<input type="hidden" id="dId" disabled value="${emp.dId}">
+				
+				<button type="submit" id="" class="btn btn-default hide">Submit</button>
 			</form>
 		</div>
 
@@ -40,17 +47,23 @@
 	<script type="text/javascript">
 		$(function() {
 			//请求员工部门的数据的ajax
-			$
-					.ajax({
+			$.ajax({
 						type : "GET",
 						url : "${ctx}/department/listJson?pageNum=1",
 						success : function(data) {
-							var depList = data.data.list, liString = "";
+							var depList = data.data.list, options = "";
 							for (var i = 0; i < depList.length; i++) {
-								liString += "<li><a href='#' deptId='"+depList[i].deptId+"'>"
-										+ depList[i].deptName + "</a></li>";
+								options += "<option value='"+depList[i].deptId+"'>"
+										+ depList[i].deptName + "</option>";
 							}
-							$("#deptDropMenu").html(liString);
+							$("#depSelect").html(options);
+							var dId=$("#dId").val();
+							for(var i=0;i<$("#depSelect").find("option").length;i++){
+								if(dId==$("#depSelect").find("option").eq(i).val()){
+									$("#depSelect").find("option").eq(i).attr("selected",true);
+								}
+							}
+							
 						}
 
 					})

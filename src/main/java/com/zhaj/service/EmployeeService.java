@@ -40,9 +40,23 @@ public class EmployeeService {
 	public void insertEmp(Employee employee) {
 		employeeMapper.insertSelective(employee);
 	}
+	
 
+	/**
+	 * 查看单个员工
+	 * @param empId
+	 * @return
+	 */
 	public Employee selectOneEmp(String empId) {
 		return employeeMapper.selectByPrimaryKey(empId);
+	}
+
+	/**
+	 * 修改单个员工
+	 * @param emp
+	 */
+	public void updateOne(Employee emp) {
+		employeeMapper.updateByPrimaryKeySelective(emp);
 	}
 
 }

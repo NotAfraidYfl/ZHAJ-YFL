@@ -1,5 +1,5 @@
 @CHARSET "UTF-8";
-
+/* searchForm搜索框统一样式 */
 #searchForm {
 	background: #ffffff;
 	padding: 15px;
@@ -15,3 +15,9 @@
 .body-div {
 	margin: 15px 15px;
 }
+
+/* 设置隐藏属性 */
+.hide{
+	display:none;
+}
+

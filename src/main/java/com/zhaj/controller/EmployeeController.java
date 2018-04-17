@@ -113,20 +113,36 @@ public class EmployeeController {
 
 	/**
 	 * 修改单个员工数据
-	 * 
 	 * @param emp
 	 * @return
 	 */
 	@RequestMapping("editEempView")
 	public String editEmp(Employee emp) {
 		String empId = emp.getdId();
-
 		return "EmployeeViews/empEditAndEdit";
 	}
+	@RequestMapping("/updateOne")
+	@ResponseBody
+	public JsonModel updateOne(Employee emp) {
+		JsonModel jsonModel = new JsonModel();
+		if (emp.getEmpId().isEmpty() || emp == null) {
+			jsonModel.setCode(-1);
+			jsonModel.setInfo("员工ID不能为空！！");
+		} else {
+			try {
+				employeeService.updateOne(emp);
+				jsonModel.setCode(0);
+			} catch (Exception e) {
+				jsonModel.setCode(-1);
+				jsonModel.setInfo("出现异常，请检查代码！！");
+			}
+		}
+		return jsonModel;
+	}
+	
 
 	/**
 	 * 查看单个员工数据
-	 * 
 	 * @param empId
 	 * @return
 	 */
@@ -136,7 +152,6 @@ public class EmployeeController {
 			Employee emp = employeeService.selectOneEmp(empId);
 			model.addAttribute("emp", emp);
 		} catch (Exception e) {
-
 		}
 		return "EmployeeViews/empEditAndEdit";
 	}

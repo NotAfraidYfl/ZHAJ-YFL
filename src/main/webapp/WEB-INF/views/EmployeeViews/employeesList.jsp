@@ -167,11 +167,25 @@
 		}
 		//查看员工
 		var detail = function(that) {
-			let empId=$(that).attr("emp-id");
+			var empId=$(that).attr("emp-id");
 			open("查看员工", 
 					"${ctx}/employee/detail.do?empId="+empId, 
 					[ '900px','600px' ], 
-					function(index, layero) {});
+					function(index, layero) {
+						//这里面写点击确定后的回调方法
+						var body = top.layer.getChildFrame('body', index);
+						var iframeWin = top[layero.find('iframe')[0]['name']];
+						$.ajax({
+							type:"POST",
+							url:"${ctx}/employee/updateOne",
+							data:body.find("#singleEmp").serialize(),
+							success:function(result){
+								alert("修改员工信息成功");
+							}
+							
+						});
+						
+					});
 		}
 	</script>
 
