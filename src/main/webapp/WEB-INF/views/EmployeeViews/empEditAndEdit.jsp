@@ -13,19 +13,22 @@
 			<form>
 				<div class="form-group">
 					<label for="exampleInputEmail1">员工姓名：</label> <input type="text"
-						class="form-control" id="" placeholder="请输入员工姓名">
+						class="form-control" id="" placeholder="请输入员工姓名"
+						value="${emp.empName}">
 				</div>
 				<div class="form-group">
 					<label for="exampleInputPassword1">性别：</label> <input type="text"
-						class="form-control" id="" placeholder="请输入员工性别">
+						class="form-control" id="" placeholder="请输入员工性别"
+						value="<c:if test='${emp.empGender==1}'>男</c:if><c:if test='${emp.empGender==0}'>女</c:if>">
 				</div>
 				<div class="form-group">
 					<label for="exampleInputFile">邮箱：</label> <input type="email"
-						class="form-control" id="" placeholder="请输入员工邮箱">
+						class="form-control" id="" placeholder="请输入员工邮箱" value="${emp.empEmail}">
 				</div>
 				<div class="form-group">
 					<label for="exampleInputFile">所属部门：</label> <select
 						class="form-control">
+						<option></option>
 						<option value=""></option>
 					</select>
 				</div>
@@ -37,7 +40,8 @@
 	<script type="text/javascript">
 		$(function() {
 			//请求员工部门的数据的ajax
-			$.ajax({
+			$
+					.ajax({
 						type : "GET",
 						url : "${ctx}/department/listJson?pageNum=1",
 						success : function(data) {

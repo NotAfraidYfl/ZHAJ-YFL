@@ -4,11 +4,13 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fasterxml.jackson.annotation.JsonCreator.Mode;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.zhaj.bean.Employee;
@@ -79,17 +81,20 @@ public class EmployeeController {
 		}
 		return jsonModel;
 	}
+
 	/**
 	 * 新增单个员工
+	 * 
 	 * @param emp
 	 * @return
 	 */
 	@RequestMapping("createEempView")
-	public String createEmpView(){
+	public String createEmpView() {
 		return "EmployeeViews/empEditAndEdit";
 	}
-	public JsonModel createEmp(Employee emp){
-		JsonModel jsonModel=new JsonModel();
+
+	public JsonModel createEmp(Employee emp) {
+		JsonModel jsonModel = new JsonModel();
 		if (StringUtils.isEmpty(emp)) {
 			jsonModel.setCode(-1);
 			jsonModel.setInfo("员工对象不能为空！");
@@ -105,32 +110,35 @@ public class EmployeeController {
 		}
 		return jsonModel;
 	}
-	
+
 	/**
 	 * 修改单个员工数据
+	 * 
 	 * @param emp
 	 * @return
 	 */
 	@RequestMapping("editEempView")
-	public String editEmp(Employee emp){
-		String empId= emp.getdId();
-		
-		
+	public String editEmp(Employee emp) {
+		String empId = emp.getdId();
+
 		return "EmployeeViews/empEditAndEdit";
 	}
-	
+
 	/**
 	 * 查看单个员工数据
+	 * 
 	 * @param empId
 	 * @return
 	 */
-	public String viewOfEmp(String empId){
-		
-		
+	@RequestMapping("detail")
+	public String viewOfEmp(String empId, Model model) {
+		try {
+			Employee emp = employeeService.selectOneEmp(empId);
+			model.addAttribute("emp", emp);
+		} catch (Exception e) {
+
+		}
 		return "EmployeeViews/empEditAndEdit";
 	}
-	
-	
-	
 
 }

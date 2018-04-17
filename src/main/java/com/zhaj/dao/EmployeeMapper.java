@@ -23,7 +23,7 @@ public interface EmployeeMapper {
 //    带部门的条件查询
     List<Employee> selectByExampleWithDept(EmployeeExample example);
 
-    Employee selectByPrimaryKeyWithDept(Integer empId);
+    Employee selectByPrimaryKeyWithDept(String empId);
 
     int updateByExampleSelective(@Param("record") Employee record, @Param("example") EmployeeExample example);
 

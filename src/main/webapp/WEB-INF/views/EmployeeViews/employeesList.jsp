@@ -9,7 +9,6 @@
 </head>
 <body>
 	<%@include file="/WEB-INF/views/header/header.jsp"%>
-
 	<div class="body-div">
 		<div id="formDiv">
 			<form id="searchForm">
@@ -22,8 +21,15 @@
 						</div>
 						<div class="form-inline col-xs-3">
 							<label for="exampleInputFile">所属部门：</label> <select
-								class="form-control">
+								class="form-control" name="d_id">
 								<option value=""></option>
+							</select>
+						</div>
+						<div class="form-inline col-xs-3">
+							<label for="exampleInputFile">性别</label> <select
+								class="form-control">
+								<option value="0">女</option>
+								<option value="1">男</option>
 							</select>
 						</div>
 						<div class="form-inline col-xs-3">
@@ -99,19 +105,21 @@
 
 		});
 		//处理表格的方法,格式化一行
-		function formatOneRow(i, row) {
+		var formatOneRow = function(i, row) {
 			return "<tr><td class='text-center'>" + i + "</td>"
-					+ "<td class='text-center'>" + row.empName + "</td>"
+					+ "<td class='text-center'><a emp-id=" + row.empId
+					+ " onclick='detail(this)'>" + row.empName + "</a></td>"
 					+ "<td class='text-center'>" + row.empTel + "</td>"
 					+ "<td class='text-center'>" + formatGender(row.empGender)
 					+ "</td>" + "<td class='text-center'>" + row.empEmail
-					+ "</td>" + "<td class='text-center'>" + row.department.deptName
-					+ "</td>" + "<td class='text-center'><a empId=" + row.empId
+					+ "</td>" + "<td class='text-center'>"
+					+ row.department.deptName + "</td>"
+					+ "<td class='text-center'><a empId=" + row.empId
 					+ " onclick='deletEmp(this)'>删除</a>" + "</td>" + "</tr>"
 
 		}
 		//格式化性别的方法
-		function formatGender(gender) {
+		var formatGender = function(gender) {
 			switch (gender) {
 			case 0:
 				return "女";
@@ -125,7 +133,7 @@
 		}
 		//渲染表格和分页控件
 		//need r.page, r.total, r.data
-		function renderTable(r) {
+		var renderTable = function(r) {
 			//renderPage(r);
 			//var pageSize = $('#pageSize').val();
 			//var offset = pageSize * (r.page - 1) + 1;
@@ -136,14 +144,14 @@
 			}
 		}
 		//新增员工
-		function createEmp() {
+		var createEmp = function() {
 			open("新增员工", "${ctx}/employee/createEempView.do", [ '900px',
 					'600px' ], function(index, layero) {
 
 			});
 		}
 		//删除员工
-		function deletEmp(that) {
+		var deletEmp = function(that) {
 			var empId = $(that).attr("empId");
 			$.ajax({
 				type : "GET",
@@ -154,9 +162,16 @@
 					} else {
 						alert(result.info);
 					}
-
 				}
 			})
+		}
+		//查看员工
+		var detail = function(that) {
+			let empId=$(that).attr("emp-id");
+			open("查看员工", 
+					"${ctx}/employee/detail.do?empId="+empId, 
+					[ '900px','600px' ], 
+					function(index, layero) {});
 		}
 	</script>
 
