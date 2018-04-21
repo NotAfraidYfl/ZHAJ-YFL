@@ -84,13 +84,12 @@ public class EmployeeController {
 
 	/**
 	 * 新增单个员工
-	 * 
 	 * @param emp
 	 * @return
 	 */
 	@RequestMapping("createEempView")
 	public String createEmpView() {
-		return "EmployeeViews/empEditAndEdit";
+		return "EmployeeViews/empEditAndAdd";
 	}
 
 	public JsonModel createEmp(Employee emp) {
@@ -119,7 +118,7 @@ public class EmployeeController {
 	@RequestMapping("editEempView")
 	public String editEmp(Employee emp) {
 		String empId = emp.getdId();
-		return "EmployeeViews/empEditAndEdit";
+		return "EmployeeViews/empEditAndAdd";
 	}
 	@RequestMapping("/updateOne")
 	@ResponseBody
@@ -153,7 +152,13 @@ public class EmployeeController {
 			model.addAttribute("emp", emp);
 		} catch (Exception e) {
 		}
-		return "EmployeeViews/empEditAndEdit";
+		return "EmployeeViews/empEditAndAdd";
+	}
+	
+	public JsonModel searchForm(){
+		JsonModel jsonModel=new JsonModel();
+		
+		return jsonModel;
 	}
 
 }

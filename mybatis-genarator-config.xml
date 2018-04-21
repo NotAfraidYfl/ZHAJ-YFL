@@ -39,8 +39,9 @@
 			<!-- enableSubPackages:是否让schema作为包的后缀 -->
 			<property name="enableSubPackages" value="false" />
 		</javaClientGenerator>
-		<!-- 有些表的字段需要指定java类型 -->
-		<table tableName="tb_emp" domainObjectName="Employee"></table>
-		<table tableName="tb_dept" domainObjectName="Department"></table>
+		<!-- 有些表的字段需要指定java类型  指定要生成的那些表-->
+		<!-- <table tableName="tb_emp" domainObjectName="Employee"></table>
+		<table tableName="tb_dept" domainObjectName="Department"></table> -->
+		<table tableName="tb_houses" domainObjectName="House"></table>
 	</context>
 </generatorConfiguration>

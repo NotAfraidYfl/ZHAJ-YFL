@@ -22,23 +22,26 @@
 						value="${emp.empTel}">
 				</div>
 				<div class="form-group">
-					<label for="exampleInputPassword1">性别：</label> <input type="text"
-						class="form-control" id="" name="empGender" placeholder="请输入员工性别"
-						value="<c:if test='${emp.empGender==1}'>男</c:if><c:if test='${emp.empGender==0}'>女</c:if>">
+					<label for="exampleInputPassword1">性别：</label> <select
+						class="form-control" id="" name="empGender">
+							<option value="1" ${emp.empGender==1?"selected":"" }>男</option>
+							<option value="0" ${emp.empGender==0?"selected":"" }>女</option>
+						</select>
 				</div>
 				<div class="form-group">
 					<label for="exampleInputFile">邮箱：</label> <input type="email"
-						class="form-control" id="" name="empEmail" placeholder="请输入员工邮箱" value="${emp.empEmail}">
+						class="form-control" id="" name="empEmail" placeholder="请输入员工邮箱"
+						value="${emp.empEmail}">
 				</div>
 				<div class="form-group">
-					<label for="exampleInputFile">所属部门：</label> 
-					<select	class="form-control" name="dId" id="depSelect">
+					<label for="exampleInputFile">所属部门：</label> <select
+						class="form-control" name="dId" id="depSelect">
 						<option></option>
 					</select>
 				</div>
-				<input type="hidden" name="empId" value="${emp.empId}">
-				<input type="hidden" id="dId" disabled value="${emp.dId}">
-				
+				<input type="hidden" name="empId" value="${emp.empId}"> <input
+					type="hidden" id="dId" disabled value="${emp.dId}">
+
 				<button type="submit" id="" class="btn btn-default hide">Submit</button>
 			</form>
 		</div>
@@ -47,7 +50,8 @@
 	<script type="text/javascript">
 		$(function() {
 			//请求员工部门的数据的ajax
-			$.ajax({
+			$
+					.ajax({
 						type : "GET",
 						url : "${ctx}/department/listJson?pageNum=1",
 						success : function(data) {
@@ -57,13 +61,15 @@
 										+ depList[i].deptName + "</option>";
 							}
 							$("#depSelect").html(options);
-							var dId=$("#dId").val();
-							for(var i=0;i<$("#depSelect").find("option").length;i++){
-								if(dId==$("#depSelect").find("option").eq(i).val()){
-									$("#depSelect").find("option").eq(i).attr("selected",true);
+							var dId = $("#dId").val();
+							for (var i = 0; i < $("#depSelect").find("option").length; i++) {
+								if (dId == $("#depSelect").find("option").eq(i)
+										.val()) {
+									$("#depSelect").find("option").eq(i).attr(
+											"selected", true);
 								}
 							}
-							
+
 						}
 
 					})

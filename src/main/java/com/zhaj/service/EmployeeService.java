@@ -24,6 +24,10 @@ public class EmployeeService {
 		// 查询带部门的信息 查询所有(不带条件)
 		return employeeMapper.selectByExampleWithDept(null);
 	}
+	
+	/*public List<Employee> getAll(Employee emp){
+		return employeeMapper.selectByExampleWithDept(emp);
+	}*/
 
 	/**
 	 * 删除单个员工

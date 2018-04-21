@@ -33,7 +33,7 @@
 				</button>
 				<div class="navbar-brand">
 					<h1>
-						<a href="index.html"><span>Real </span>Space</a>
+						<a href="index.html"><span>Real </span>Home</a>
 					</h1>
 				</div>
 			</div>
@@ -63,12 +63,32 @@
 					<li><a href="codes.html">代码</a></li>
 					<li><a href="contact.html">联系我们</a></li>
 				</ul>
-				<div class="phone">
-					<span><i class="glyphicon glyphicon-phone"
-						aria-hidden="true"></i>1-999-4563-555</span>
+				<div class="house-config">
+					<span><i class="glyphicon glyphicon-home" aria-hidden="true"></i><a
+						href="${ctx}/house/houList.do">房源管理</a></span>
 				</div>
 				<div class="clearfix"></div>
 			</div>
 		</nav>
 	</div>
 </div>
+<script>
+	$(function() {
+		// 请求员工部门的数据的ajax
+		$
+				.ajax({
+					type : "GET",
+					url : "${ctx}/department/listJson?pageNum=1",
+					success : function(data) {
+						var depList = data.data.list, liString = "";
+						for (var i = 0; i < depList.length; i++) {
+							liString += "<li><a href='#' deptId='" + depList[i].deptId
+						+ "'>"
+									+ depList[i].deptName + "</a></li>";
+						}
+						$("#deptDropMenu").html(liString);
+					}
+
+				})
+	})
+</script>

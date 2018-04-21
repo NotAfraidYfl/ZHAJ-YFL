@@ -67,21 +67,6 @@ $(window).resize(function () {
     $(".panel-body").css("height",Wheight)
 
 });
-/*$(document).ready(function() {
- //列表初始化
- $('.table-fqz').size() > 0 && $('.table-fqz').dataTable( {
- paging: false,
- info:false,
- ordering:false,
- searching: false,
- "scrollX": 200,
- "sScrollXInner" : "100%",
- //        "dom": "<'row'<'col-sm-6'l><'col-sm-6'f>><'row'<'col-sm-12'tr>><'row'<'col-sm-5'i><'col-sm-7'p>>",
- "language": {
- "url": basePath + "/res/datatables/chinese.lang"
- }
- });
- });*/
 
 //-------------------获取上传框文件绝对路径------------
 //FX获取文件路径方法
@@ -145,25 +130,6 @@ function getvl(obj) {
     // document.getElementById("text").innerHTML="获取文件域完整路径为："+file_url;
     return file_url;
 }
-//去除chrome自动填表
-function noAutoComplete() {
-    if (navigator.userAgent.toLowerCase().indexOf("chrome") != -1) {
-        var selectors = $("input");
-        for (var i = 0; i < selectors.length; i++) {
-            if ((selectors[i].type !== "submit") && (selectors[i].type !== "password") && (selectors.eq(i).attr("disabled") !== "disabled")) {
-                selectors[i].disabled = true;
-            }
-        }
-        setTimeout(function () {
-            for (var i = 0; i < selectors.length; i++) {
-                if (selectors[i].type !== "submit") {
-                    selectors[i].disabled = false;
-                }
-            }
-        }, 100)
-    }
-}
-noAutoComplete();
 
 //排序提交
 function tableOrderSort(order, sort) {
@@ -398,114 +364,6 @@ function UploadImgShow(obj, imgBOX) {
         reader.readAsDataURL(file);
     }
 }
-var arrNO = [];
-var arrNO1 = [];
-function imgUrl(imgBOX) {
-    var imageUrl = $("#uploadFrame").contents().find("body").text();
-    console.log(imageUrl + "__________");
-    var ctName = $("#ctName").val();
-    var ctId = $("#ctId").val();
-    if (imageUrl != "") {
-        clearInterval(t);
-        if(imgBOX=="upImgBOX"){
-            $(".close-img").removeClass("hide");
-            $("#upimgBtn").attr('disabled', false).text('上传证书图片');
-            console.log(imageUrl);
-            imageUrl = JSON.parse(imageUrl);
-            if (imageUrl.code == 0) {
-                var str = $("#credentials").val();
-                str += "{ctName:'" + ctName + "',ctId:'" + ctId + "',res:'" + imageUrl.res + "'}&";
-                $("#credentials").val(str);
-                console.log($("#credentials").val());
-                $("#ctName").val("");
-                $("#ctId").val("");
-                $("#uploadFrame").contents().find("body").html('')
-            } else {
-                alert(imageUrl.desc)
-            }
-        }
-        if(imgBOX=="fileUP"){
-            $("#upimgBtn").attr('disabled', false).text('上传');
-            console.log(imageUrl);
-            imageUrl = JSON.parse(imageUrl);
-            if (imageUrl.code == 0) {
-                var str = "";
-                    str= {fileAttachmentPath:imageUrl.res,fileAttachmentTitle:imageUrl.oldName+""+imageUrl.type};
-                    arrNO.push(str);
-                    var strT = JSON.stringify(arrNO);
-                $("#fileUPn").val(strT);
-                console.log($("#fileUPn").val());
-                $("#uploadFrame").contents().find("body").html('');
-                upfileTable()
-            } else {
-                alert(imageUrl.desc)
-            }
-        }
-        if(imgBOX=="fault"){
-            $(".close-img").removeClass("hide");
-            $("#upimgBtn").attr('disabled', false).val('添加');
-            console.log(imageUrl);
-            imageUrl = JSON.parse(imageUrl);
-            if (imageUrl.code == 0) {
-                $("#" + imgBOX).append("<a class='imgShow' href='http://oy3l6qawm.bkt.clouddn.com/"+imageUrl.res+"' target='_blank'><img style='border: 3px solid #cccccc;width: 150px;height: 100px;margin-right: 5px' src='http://oy3l6qawm.bkt.clouddn.com/"+imageUrl.res+"'><span class='close-img' flagSt='"+imageUrl.res+"' onclick='closeImg1(this)'></span></a>");
-                var str = "";
-                // str= {fileAttachmentPath:imageUrl.res,fileAttachmentTitle:imageUrl.oldName+""+imageUrl.type};
-                arrNO1.push(imageUrl.res);
-                var strT = JSON.stringify(arrNO1);
-                $("#fileUPn").val(strT);
-                console.log($("#fileUPn").val());
-                $("#uploadFrame").contents().find("body").html('')
-            } else {
-                alert(imageUrl.desc)
-            }
-        }
-    }
-}
-//    公告函件上传样式附加
-function upfileTable() {
-    var picFile = $("#picFile").val();
-    var index = picFile.lastIndexOf('\\');
-    picFile = picFile.substring(index + 1, picFile.length);
-    $("#ulUPfile").append("<li>"+picFile+"</li>")
-
-}
-function closeImg(that) {
-    $(that).parent().click(function (e) {
-        e.preventDefault();
-        e.stopPropagation();
-        // alert("a标签被阻止了");
-        $(that).parent().unbind('click');
-        var ctObjArr = $("#credentials").val();
-        ctObjArr = ctObjArr.split('&');
-        var index = $("span.close-img").index($(that));
-        ctObjArr.splice(index, 1);
-        ctObjArr.splice(ctObjArr.length - 1, 1);
-        var str = "";
-        for (var i = 0; i < ctObjArr.length; i++) {
-            str += ctObjArr[i] + "&"
-        }
-        $("#credentials").val(str);
-        console.log($("#credentials").val())
-        $(that).parent().remove();
-    });
-}
-function closeImg1(that) {
-    $(that).parent().click(function (e) {
-        e.preventDefault();
-        e.stopPropagation();
-        // alert("a标签被阻止了");
-        $(that).parent().unbind('click');
-        for (var i = 0; i < arrNO1.length; i++) {
-            if($(that).attr("flagSt")==arrNO1[i]){
-                arrNO1.splice(i,1);
-            }
-        }
-        var strT = JSON.stringify(arrNO1);
-        $("#fileUPn").val(strT);
-        console.log($("#credentials").val())
-        $(that).parent().remove();
-    });
-}
 //上传图片载入
 function imgBoxload(imgBOX) {
     var ctObj = $("#credentials").val();
@@ -732,30 +590,3 @@ function fmtYMDHMS(timestamp) {
     if(isNaN(timestamp)) return '';
     return new Date(timestamp).Format("yyyy-MM-dd hh:mm:ss");
 }
-//合并单元格, 例子: $('#tb1').rowspan(0);
-(function ($) {
-    $.fn.extend({
-        //表格合并单元格，colIdx要合并的列序号，从0开始
-        "rowspan": function (colIdx) {
-            return this.each(function () {
-                var that;
-                $('tr', this).each(function (row) {
-                    $('td:eq(' + colIdx + ')', this).filter(':visible').each(function (col) {
-                        if (that != null && $(this).html() == $(that).html()) {
-                            rowspan = $(that).attr("rowSpan");
-                            if (rowspan == undefined) {
-                                $(that).attr("rowSpan", 1);
-                                rowspan = $(that).attr("rowSpan");
-                            }
-                            rowspan = Number(rowspan) + 1;
-                            $(that).attr("rowSpan", rowspan);
-                            $(this).hide();
-                        } else {
-                            that = this;
-                        }
-                    });
-                });
-            });
-        }
-    });
-})(jQuery);

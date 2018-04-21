@@ -35,9 +35,7 @@
 </script>
 </head>
 <body>
-	<%@include file="../header/header.jsp"%>
-
-
+	<%@include file="/WEB-INF/views/header/header.jsp"%>
 	<!---banner--->
 	<div class="slider">
 		<div class="callbacks_container">
@@ -167,13 +165,13 @@
 						<h5>Max Price</h5>
 						<select class="sel">
 							<option value="">any</option>
-							<option value="">$1000</option>
-							<option value="">$2000</option>
-							<option value="">$3000</option>
-							<option value="">$4000</option>
-							<option value="">$5000</option>
-							<option value="">$75000</option>
-							<option value="">$10000</option>
+							<option value="">￥1000</option>
+							<option value="">￥2000</option>
+							<option value="">￥3000</option>
+							<option value="">￥4000</option>
+							<option value="">￥5000</option>
+							<option value="">￥75000</option>
+							<option value="">￥10000</option>
 						</select>
 					</div>
 					<div class="col-md-4 search">
@@ -224,7 +222,8 @@
 							</h4>
 							<div class="offer1">
 								<div class="offer-left">
-									<a href="single.html" class="mask"><img src="${ctx}/static/images/p3.jpg"
+									<a href="single.html" class="mask"><img
+										src="${ctx}/static/images/p3.jpg"
 										class="img-responsive zoom-img" alt="" /></a>
 								</div>
 								<div class="offer-right">
@@ -247,7 +246,8 @@
 							</h4>
 							<div class="offer1">
 								<div class="offer-left">
-									<a href="single.html" class="mask"><img src="${ctx}/static/images/p4.jpg"
+									<a href="single.html" class="mask"><img
+										src="${ctx}/static/images/p4.jpg"
 										class="img-responsive zoom-img" alt="" /></a>
 								</div>
 								<div class="offer-right">
@@ -272,12 +272,13 @@
 							</h4>
 							<div class="offer1">
 								<div class="offer-left">
-									<a href="single.html" class="mask"><img src="${ctx}/static/images/p5.jpg"
+									<a href="single.html" class="mask"><img
+										src="${ctx}/static/images/p5.jpg"
 										class="img-responsive zoom-img" alt="" /></a>
 								</div>
 								<div class="offer-right">
 									<h5>
-										<label>$</label> 5,200 Per Month - <span>Office</span>
+										<label>￥</label> 5,200 Per Month - <span>Office</span>
 									</h5>
 									<p>Lorem ipsum dolor sit amet, consectetuer adipiscing
 										elit, sed diam nonummy nibh…</p>
@@ -294,12 +295,13 @@
 							</h4>
 							<div class="offer1">
 								<div class="offer-left">
-									<a href="single.html" class="mask"><img src="${ctx}/static/images/p6.jpg"
+									<a href="single.html" class="mask"><img
+										src="${ctx}/static/images/p6.jpg"
 										class="img-responsive zoom-img" alt="" /></a>
 								</div>
 								<div class="offer-right">
 									<h5>
-										<label>$</label> 525,000 - <span>Villa</span>
+										<label>￥</label> 525,000 - <span>Villa</span>
 									</h5>
 									<p>Lorem ipsum dolor sit amet, consectetuer adipiscing
 										elit, sed diam nonummy nibh…</p>
@@ -319,12 +321,13 @@
 							</h4>
 							<div class="offer1">
 								<div class="offer-left">
-									<a href="single.html" class="mask"><img src="${ctx}/static/images/p7.jpg"
+									<a href="single.html" class="mask"><img
+										src="${ctx}/static/images/p7.jpg"
 										class="img-responsive zoom-img" alt="" /></a>
 								</div>
 								<div class="offer-right">
 									<h5>
-										<label>$</label> 3,200 Per Month - <span>Apartment</span>
+										<label>￥</label> 3,200 Per Month - <span>Apartment</span>
 									</h5>
 									<p>Lorem ipsum dolor sit amet, consectetuer adipiscing
 										elit, sed diam nonummy nibh…</p>
@@ -341,12 +344,13 @@
 							</h4>
 							<div class="offer1">
 								<div class="offer-left">
-									<a href="single.html" class="mask"><img src="${ctx}/static/images/p8.jpg"
+									<a href="single.html" class="mask"><img
+										src="${ctx}/static/images/p8.jpg"
 										class="img-responsive zoom-img" alt="" /></a>
 								</div>
 								<div class="offer-right">
 									<h5>
-										<label>$</label> 4,200 Per Month - <span>Apartment</span>
+										<label>￥</label> 4,200 Per Month - <span>Apartment</span>
 									</h5>
 									<p>Lorem ipsum dolor sit amet, consectetuer adipiscing
 										elit, sed diam nonummy nibh…</p>
@@ -366,40 +370,44 @@
 				<h3>Featured Properties</h3>
 				<div class="feature-grids">
 					<div class="col-md-3 feature-grid">
-						<img src="${ctx}/static/images/f1.jpg" class="img-responsive" alt="/">
+						<img src="${ctx}/static/images/f1.jpg" class="img-responsive"
+							alt="/">
 						<h5>Villa in Hialeah, Dade</h5>
 						<p>
 							Lorem ipsum dolor sit amet, consectetuer elit,… <a href="#">Know
 								More</a>
 						</p>
-						<span>$2,500 Per Month</span>
+						<span>￥2,500 Per Month</span>
 					</div>
 					<div class="col-md-3 feature-grid">
-						<img src="${ctx}/static/images/f2.jpg" class="img-responsive" alt="/">
+						<img src="${ctx}/static/images/f2.jpg" class="img-responsive"
+							alt="/">
 						<h5>401 Biscayne Boulevard</h5>
 						<p>
 							Lorem ipsum dolor sit amet, consectetuer elit,… <a href="#">Know
 								More</a>
 						</p>
-						<span>$7,500 Per Month</span>
+						<span>￥7,500 Per Month</span>
 					</div>
 					<div class="col-md-3 feature-grid">
-						<img src="${ctx}/static/images/f3.jpg" class="img-responsive" alt="/">
+						<img src="${ctx}/static/images/f3.jpg" class="img-responsive"
+							alt="/">
 						<h5>154 Southwest Terra</h5>
 						<p>
 							Lorem ipsum dolor sit amet, consectetuer elit,… <a href="#">Know
 								More</a>
 						</p>
-						<span>$9,500 Per Month</span>
+						<span>￥9,500 Per Month</span>
 					</div>
 					<div class="col-md-3 feature-grid">
-						<img src="${ctx}/static/images/f4.jpg" class="img-responsive" alt="/">
+						<img src="${ctx}/static/images/f4.jpg" class="img-responsive"
+							alt="/">
 						<h5>Florida 5, Pinecrest, FL</h5>
 						<p>
 							Lorem ipsum dolor sit amet, consectetuer elit,… <a href="#">Know
 								More</a>
 						</p>
-						<span>$5,500 Per Month</span>
+						<span>￥5,500 Per Month</span>
 					</div>
 					<div class="clearfix"></div>
 				</div>
@@ -461,7 +469,8 @@
 				<div id="owl-demo" class="owl-carousel">
 					<div class="item">
 						<div class="col-md-2 testmonial-img">
-							<img src="${ctx}/static/images/t1.png" class="img-responsive" alt="" />
+							<img src="${ctx}/static/images/t1.png" class="img-responsive"
+								alt="" />
 						</div>
 						<div class="col-md-10 testmonial-text">
 							<p>Lorem ipsum dolor sit amet, offendit volutpat sea ex, at
@@ -476,7 +485,8 @@
 					</div>
 					<div class="item">
 						<div class="col-md-2 testmonial-img">
-							<img src="${ctx}/static/images/t2.png" class="img-responsive" alt="" />
+							<img src="${ctx}/static/images/t2.png" class="img-responsive"
+								alt="" />
 						</div>
 						<div class="col-md-10 testmonial-text">
 							<p>Lorem ipsum dolor sit amet, offendit volutpat sea ex, at
@@ -491,7 +501,8 @@
 					</div>
 					<div class="item">
 						<div class="col-md-2 testmonial-img">
-							<img src="${ctx}/static/images/t3.png" class="img-responsive" alt="" />
+							<img src="${ctx}/static/images/t3.png" class="img-responsive"
+								alt="" />
 						</div>
 						<div class="col-md-10 testmonial-text">
 							<p>Lorem ipsum dolor sit amet, offendit volutpat sea ex, at

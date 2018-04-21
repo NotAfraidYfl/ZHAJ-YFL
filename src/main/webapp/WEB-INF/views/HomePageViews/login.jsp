@@ -223,22 +223,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		</div>
 	</div>
 	<script type="text/javascript">
-		$(function() {
-			//请求员工部门的数据的ajax
-			$.ajax({
-						type : "GET",
-						url : "${ctx}/department/listJson?pageNum=1",
-						success : function(data) {
-							var depList = data.data.list, liString="";
-							for (var i = 0; i < depList.length; i++) {
-								liString += "<li><a href='#' deptId='"+depList[i].deptId+"'>"
-										+ depList[i].deptName + "</a></li>";
-							}
-							$("#deptDropMenu").html(liString);
-						}
-
-					})
-		})
 	</script>
 </body>
 </html>
