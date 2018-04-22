@@ -10,11 +10,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.zhaj.bean.Employee;
 import com.zhaj.bean.House;
 import com.zhaj.service.HouseService;
 import com.zhaj.utils.JsonModel;
 import com.zhaj.utils.PageModel;
+import com.zhaj.utils.Utils;
 
 @Controller
 @RequestMapping("house")
@@ -24,6 +24,7 @@ public class HouseController {
 
 	/**
 	 * 房屋列表跳转
+	 * 
 	 * @return
 	 */
 	@RequestMapping("/houList")
@@ -55,24 +56,30 @@ public class HouseController {
 		jsonModel.setPage(page.getPageNum());
 		return jsonModel;
 	}
-	
+
 	/**
 	 * 新增房源
+	 * 
 	 * @param emp
 	 * @return
 	 */
-	@RequestMapping("createHouseView")
+	@RequestMapping("/createHouseView")
 	public String createEmpView() {
 		return "HouseViews/houseEditAndAdd";
 	}
 
-	public JsonModel createEmp(Employee emp) {
+	@RequestMapping("/createHouse")
+	@ResponseBody
+	public JsonModel createEmp(House hou) {
 		JsonModel jsonModel = new JsonModel();
-		if (StringUtils.isEmpty(emp)) {
+		if (StringUtils.isEmpty(hou)) {
 			jsonModel.setCode(-1);
-			jsonModel.setInfo("员工对象不能为空！");
+			jsonModel.setInfo("房源信息不能为空！");
 		} else {
 			try {
+				hou.setHousesId(Utils.uuid());
+				hou.setEmpId("01e0b35d2f");
+				houseService.insertOneHouse(hou);
 				jsonModel.setInfo("新增成功！");
 				jsonModel.setCode(0);
 			} catch (Exception e) {
@@ -82,7 +89,5 @@ public class HouseController {
 		}
 		return jsonModel;
 	}
-	
-	
 
 }

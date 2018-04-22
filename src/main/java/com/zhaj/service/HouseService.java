@@ -17,4 +17,9 @@ public class HouseService {
 		return houseMapper.selectByExample(null);
 	}
 
+	public void insertOneHouse(House house) {
+		houseMapper.insertSelective(house);
+
+	}
+
 }

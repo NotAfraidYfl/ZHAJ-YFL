@@ -5,69 +5,109 @@
 <html>
 <head>
 <%@include file="/WEB-INF/views/common/common.jsp"%>
-<link href="${ctx}/static/distpicker-master/src" rel="stylesheet" />
 <script type="text/javascript"
-	src="${ctx}/static/distpicker-master/dist/distpicker.common.js"></script>
+	src="${ctx}/static/jsFramework/distpicker.data.js"></script>
 <script type="text/javascript"
-	src="${ctx}/static/distpicker-master/dist/distpicker.js"></script>
+	src="${ctx}/static/jsFramework/distpicker.js"></script>
 <title>新增/修改房源页面</title>
 </head>
-// 省 private String houProvince; // 市 private String houCity; // 区
-private String houDistrict; // 详细地址 private String houDetail; // 房屋描述
-private String houDescription; // 房东邮箱 private String owenerEmail; //
-图片路径 private String houPhotos; // 租赁或者出售价格 private Float houPrice; //
-发布时间 private Date putDate; // 房屋所在楼层 private Integer houFloor; // 房屋总楼层
-private Integer totalFloors; // 房型 1.一室 2.两室 3.三室 private Integer
-houType; // 房屋类型 0 --二手房 1 --出租房 private Integer houCatg; // 负责员工Id
-private String empId; // 房屋状态 private Integer houStatus;
-
 <body>
 	<div class="body-div">
 		<div class="col-xs-12">
-			<form action="${ctx}/employee/updateOne" id="singleEmp">
-				<div class="form-group">
-					<label for="">房东姓名：</label> <input type="text" class="form-control"
+			<form action="${ctx}/employee/updateOne" class="form-inline"
+				id="singleHouse">
+				<div class="form-group valid_cow col-xs-6">
+					<label class="col-xs-4">房东姓名：</label> <input type="text" class="form-control input-width-200"
 						id="" name="houOwner" placeholder="请输入房东姓名" value="">
 				</div>
-				<div class="form-group">
-					<label for="exampleInputEmail1">房东电话：</label> <input type="text"
-						class="form-control" id="" name="ownerTel" placeholder="请输入员工姓名"
-						value="${emp.empTel}">
+				<div class="form-group valid_cow col-xs-6">
+					<label class="col-xs-4">房东电话：</label> <input type="text"
+						class="form-control input-width-200" name="ownerTel" placeholder="请输入房东电话"
+						value="">
 				</div>
-				<div class="form-group">
-					<div data-toggle="distpicker">
-						<select></select> <select></select> <select></select>
+				<div class="form-group valid_cow col-xs-6">
+					<label class="col-xs-4">房东邮箱：</label> <input type="text"
+						class="form-control input-width-200" name="owenerEmail" placeholder="请输入房东电话"
+						value="">
+				</div>
+				<div class="form-group valid_cow col-xs-12">
+					<label class="col-xs-2">房源地址：</label>
+					<div id="distpicker">
+						<select class="form-control input-width-200" name="houProvince"></select> 
+						<select	class="form-control input-width-200" name="houCity"></select> 
+						<select	class="form-control input-width-200" name="houDistrict"></select>
 					</div>
 				</div>
-
-				<div class="form-group">
-					<label for="exampleInputPassword1">性别：</label> <select
-						class="form-control" id="" name="empGender">
-						<option value="1" ${emp.empGender==1?"selected":"" }>男</option>
-						<option value="0" ${emp.empGender==0?"selected":"" }>女</option>
+				<div class="form-group valid_cow col-xs-6">
+					<label class="col-xs-4">详细地址：</label>
+					<input type="text" class="form-control input-width-200" name="houDetail">
+				</div>
+				<div class="form-group valid_cow col-xs-6">
+					<label class="col-xs-4">房源描述：</label> 
+					<input type="text"	class="form-control input-width-200" id="" name="houDescription" placeholder="eg:有空调，近地铁"
+						value="">
+				</div>
+				<div class="form-group valid_cow col-xs-6">
+					<label class="col-xs-4">房源价格：</label> 
+					<input type="text"	class="form-control input-width-200" name="houPrice" placeholder="￥"
+						value="">
+				</div>
+				<div class="form-group valid_cow col-xs-6">
+					<label class="col-xs-4">发布时间：</label> 
+					<input type="text"	class="form-control input-width-200" name="putDate" placeholder="请输入发布时间"
+						value="">
+				</div>
+				<div class="form-group valid_cow col-xs-6">
+					<label class="col-xs-4">图片路径：</label> 
+					<input type="text"	class="form-control input-width-200" name="houPhotos" placeholder="请输入发布时间"
+						value="">
+				</div>
+				<div class="form-group valid_cow col-xs-6">
+					<label class="col-xs-4">所在楼层：</label> 
+					<input type="text"	class="form-control input-width-200" name="houFloor" placeholder="请输入发布时间"
+						value="">
+				</div>
+				<div class="form-group valid_cow col-xs-6">
+					<label class="col-xs-4">房源总楼层：</label> 
+					<input type="text"	class="form-control input-width-200" name="totalFloors" placeholder="请输入发布时间"
+						value="">
+				</div>
+				<div class="form-group valid_cow col-xs-6">
+					<label class="col-xs-4">房源类型：</label> 
+					<select class="form-control input-width-200" name="houCatg">
+						<option value="1">出租房</option>
+						<option value="0">二手房</option>
 					</select>
 				</div>
-				<div class="form-group">
-					<label for="exampleInputFile">邮箱：</label> <input type="email"
-						class="form-control" id="" name="empEmail" placeholder="请输入员工邮箱"
-						value="${emp.empEmail}">
-				</div>
-				<div class="form-group">
-					<label for="exampleInputFile">所属部门：</label> <select
-						class="form-control" name="dId" id="depSelect">
-						<option></option>
+				<div class="form-group valid_cow col-xs-6">
+					<label class="col-xs-4">房源户型：</label> 
+					<select class="form-control input-width-200" name="houType">
+						<option value="1">单间</option>
+						<option value="2">套一</option>
+						<option value="3">套二</option>
+						<option value="4">套三</option>
+						<option value="5">套四</option>
 					</select>
 				</div>
-				<input type="hidden" name="empId" value="${emp.empId}"> <input
-					type="hidden" id="dId" disabled value="${emp.dId}">
-
-				<button type="submit" id="" class="btn btn-default hide">Submit</button>
+				
+				<div class="form-group valid_cow col-xs-6">
+					<label class="col-xs-4">房源状态：</label> 
+					<select class="form-control input-width-200" name="houStatus">
+						<option value="0">待租/待售</option>
+						<option value="1">已租/已售</option>
+					</select>
+				</div>
+				
+				</div>
 			</form>
 		</div>
 
 	</div>
 	<script type="text/javascript">
 		$(function() {
+			$('#distpicker').distpicker({
+				autoSelect : false,
+			});
 		})
 	</script>
 

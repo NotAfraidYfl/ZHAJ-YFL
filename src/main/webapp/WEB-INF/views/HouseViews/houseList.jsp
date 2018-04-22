@@ -97,7 +97,6 @@
 				type : "GET",
 				url : "${ctx}/",
 				success : function(result) {
-					renderTable(result.data);
 				}
 
 			})
@@ -132,10 +131,22 @@
 				tbody.append(formatOneRow(i, r.list[i]));
 			}
 		}
-		//新增员工
+		//新增房源
 		var createHouse = function() {
 			open("新增房源", "${ctx}/house/createHouseView.do", [ '900px',
 					'600px' ], function(index, layero) {
+				//这里面写点击确定后的回调方法
+				var body = top.layer.getChildFrame('body', index);
+				var iframeWin = top[layero.find('iframe')[0]['name']];
+				$.ajax({
+					type:"POST",
+					url:"${ctx}/house/createHouse.do",
+					data:body.find("#singleHouse").serialize(),
+					success:function(result){
+						alert("新增房源成功");
+					}
+					
+				});
 
 			});
 		}

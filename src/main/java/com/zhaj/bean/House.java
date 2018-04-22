@@ -2,6 +2,8 @@ package com.zhaj.bean;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class House {
 	// 房屋ID
 	private String housesId;
@@ -26,6 +28,7 @@ public class House {
 	// 租赁或者出售价格
 	private Float houPrice;
 	// 发布时间
+	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date putDate;
 	// 房屋所在楼层
 	private Integer houFloor;

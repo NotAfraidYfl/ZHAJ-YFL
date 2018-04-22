@@ -17,7 +17,15 @@
 }
 
 /* 设置隐藏属性 */
-.hide{
-	display:none;
+.hide {
+	display: none;
 }
 
+.valid_cow {
+	height: 50px !important;
+	overflow: hidden;
+}
+
+.input-width-200{
+	width:200px!important;
+}
