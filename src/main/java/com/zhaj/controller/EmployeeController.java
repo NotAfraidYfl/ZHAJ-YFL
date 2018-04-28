@@ -116,8 +116,7 @@ public class EmployeeController {
 	 * @return
 	 */
 	@RequestMapping("editEempView")
-	public String editEmp(Employee emp) {
-		String empId = emp.getdId();
+	public String editEmp() {
 		return "EmployeeViews/empEditAndAdd";
 	}
 	@RequestMapping("/updateOne")

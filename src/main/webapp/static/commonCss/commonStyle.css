@@ -29,3 +29,48 @@
 .input-width-200{
 	width:200px!important;
 }
+
+th:hover {
+	cursor: default;
+}
+
+td {
+	vertical-align: middle !important;
+}
+
+.pagination>li>a, .pager>li>a {
+	height: 34px !important;
+	line-height: 21px !important;
+	padding: 6px 15px;
+}
+
+.expand-height {
+	height: 900px;
+}
+
+.pageDiy {
+	float: right;
+	margin-top: 20px;
+}
+
+.pageDiy div span, .pageDiy div a {
+	border: 1px solid #cccccc;
+	padding: 5px 10px;
+	margin-right: 10px;
+	color: #fff;
+	text-decoration: none;
+}
+
+.pageDiy div a.current {
+	background: #00a73b;
+	border: 1px solid #00a73b;
+	color: #ffffff;
+}
+
+.pageDiy div a.hiding {
+	border: none;
+}
+
+.hiddenCus {
+	visibility: hidden
+}

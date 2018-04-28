@@ -12,22 +12,27 @@
 	<div class="body-div">
 		<div id="formDiv">
 			<form id="searchForm">
+				<input type="hidden" name="pageNum" id="pageNum" value="1">
+				<input type="hidden" name="pageSize" id="pageSize" value="15">
+				<input type="hidden" name="orderBy" id="orderBy"
+					value="empName desc">
 				<div class="col-xs-12">
 					<div id="container" class="form-inline">
 						<div class="form-inline col-xs-3">
 							<label class="text-right">员工姓名：</label> <input name="name"
-								type="text" class=" form-control" placeholder="请输入公司名称"
-								value="${company.name}">
+								type="text" class=" form-control" placeholder="请输入员工姓名"
+								value="">
 						</div>
 						<div class="form-inline col-xs-3">
 							<label for="exampleInputFile">所属部门：</label> <select
 								class="form-control" name="d_id">
-								<option value=""></option>
+								<option value="">不限</option>
 							</select>
 						</div>
 						<div class="form-inline col-xs-3">
 							<label for="exampleInputFile">性别</label> <select
-								class="form-control">
+								class="form-control" name="empGender">
+								<option value="">不限</option>
 								<option value="0">女</option>
 								<option value="1">男</option>
 							</select>
@@ -35,7 +40,7 @@
 						<div class="form-inline col-xs-3">
 							<label class="text-right">员工ID：</label> <input name="name"
 								type="text" class=" form-control" placeholder="请输入公司名称"
-								value="${company.name}">
+								value="">
 						</div>
 						<div class="btn-group folat-right">
 							<button class="btn btn-default" type="button"
@@ -46,7 +51,6 @@
 					</div>
 				</div>
 			</form>
-
 		</div>
 
 		<div id="page-body">
@@ -78,10 +82,25 @@
 	<%@include file="/WEB-INF/views/footer/footer.jsp"%>
 	<script>
 		$(function() {
+			// 请求员工部门的数据的ajax
+			$.ajax({
+						type : "GET",
+						url : "${ctx}/department/listJson?pageNum=1",
+						success : function(data) {
+							var depList = data.data.list, optionString = "";
+							for (var i = 0; i < depList.length; i++) {
+								optionString += "<option value='" + depList[i].deptId +"'>"
+								+depList[i].deptName + "</option>";
+							}
+							$("select[name='d_id']").append(optionString);
+						}
+					});
+			
+			
 			//Ajax局部渲染
 			$("#searchForm").submit(function(e) {
 				e.preventDefault();
-				$.post("listjson", $("#searchForm").serialize(), function(r) {
+				$.post("listJson", $("#searchForm").serialize(), function(r) {
 					if (r.code == null) {
 						window.top.location.reload(); //Session失效
 					} else if (r.code < 0) {
@@ -97,7 +116,7 @@
 				type : "GET",
 				url : "${ctx}/employee/listJson?pageNum=1",
 				success : function(result) {
-					renderTable(result.data);
+					renderTable(result);
 					console.log(result.data.list);
 				}
 
@@ -134,13 +153,13 @@
 		//渲染表格和分页控件
 		//need r.page, r.total, r.data
 		var renderTable = function(r) {
-			//renderPage(r);
-			//var pageSize = $('#pageSize').val();
-			//var offset = pageSize * (r.page - 1) + 1;
+			renderPage(r);
+			var pageSize = $('#pageSize').val();
+			var offset = pageSize * (r.page - 1) + 1;
 			var tbody = $("#empTable tbody");
 			tbody.html("");
-			for (var i = 0; i < r.list.length; i++) {
-				tbody.append(formatOneRow(i, r.list[i]));
+			for (var i = 0; i < r.data.list.length; i++) {
+				tbody.append(formatOneRow(i, r.data.list[i]));
 			}
 		}
 		//新增员工
@@ -167,25 +186,23 @@
 		}
 		//查看员工
 		var detail = function(that) {
-			var empId=$(that).attr("emp-id");
-			open("查看员工", 
-					"${ctx}/employee/detail.do?empId="+empId, 
-					[ '900px','600px' ], 
-					function(index, layero) {
-						//这里面写点击确定后的回调方法
-						var body = top.layer.getChildFrame('body', index);
-						var iframeWin = top[layero.find('iframe')[0]['name']];
-						$.ajax({
-							type:"POST",
-							url:"${ctx}/employee/updateOne",
-							data:body.find("#singleEmp").serialize(),
-							success:function(result){
-								alert("修改员工信息成功");
-							}
-							
-						});
-						
-					});
+			var empId = $(that).attr("emp-id");
+			open("查看员工", "${ctx}/employee/detail.do?empId=" + empId, [ '900px',
+					'600px' ], function(index, layero) {
+				//这里面写点击确定后的回调方法
+				var body = top.layer.getChildFrame('body', index);
+				var iframeWin = top[layero.find('iframe')[0]['name']];
+				$.ajax({
+					type : "POST",
+					url : "${ctx}/employee/updateOne",
+					data : body.find("#singleEmp").serialize(),
+					success : function(result) {
+						alert("修改员工信息成功");
+					}
+
+				});
+
+			});
 		}
 	</script>
 

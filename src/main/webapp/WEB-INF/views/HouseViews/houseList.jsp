@@ -12,6 +12,10 @@
 	<div class="body-div">
 		<div id="formDiv">
 			<form id="searchForm">
+				<input type="hidden" name="pageNum" id="pageNum" value="1">
+				<input type="hidden" name="pageSize" id="pageSize" value="15">
+				<input type="hidden" name="orderBy" id="orderBy"
+					value="create_time desc">
 				<div class="col-xs-12">
 					<div id="container" class="form-inline">
 						<div class="form-inline col-xs-3">
@@ -81,7 +85,7 @@
 			//Ajax局部渲染
 			$("#searchForm").submit(function(e) {
 				e.preventDefault();
-				$.post("listjson", $("#searchForm").serialize(), function(r) {
+				$.post("listJson", $("#searchForm").serialize(), function(r) {
 					if (r.code == null) {
 						window.top.location.reload(); //Session失效
 					} else if (r.code < 0) {
@@ -133,22 +137,22 @@
 		}
 		//新增房源
 		var createHouse = function() {
-			open("新增房源", "${ctx}/house/createHouseView.do", [ '900px',
-					'600px' ], function(index, layero) {
-				//这里面写点击确定后的回调方法
-				var body = top.layer.getChildFrame('body', index);
-				var iframeWin = top[layero.find('iframe')[0]['name']];
-				$.ajax({
-					type:"POST",
-					url:"${ctx}/house/createHouse.do",
-					data:body.find("#singleHouse").serialize(),
-					success:function(result){
-						alert("新增房源成功");
-					}
-					
-				});
+			open("新增房源", "${ctx}/house/createHouseView.do",
+					[ '900px', '600px' ], function(index, layero) {
+						//这里面写点击确定后的回调方法
+						var body = top.layer.getChildFrame('body', index);
+						var iframeWin = top[layero.find('iframe')[0]['name']];
+						$.ajax({
+							type : "POST",
+							url : "${ctx}/house/createHouse.do",
+							data : body.find("#singleHouse").serialize(),
+							success : function(result) {
+								alert("新增房源成功");
+							}
 
-			});
+						});
+
+					});
 		}
 		//删除员工
 		var deletEmp = function(that) {
@@ -167,25 +171,23 @@
 		}
 		//查看员工
 		var detail = function(that) {
-			var empId=$(that).attr("emp-id");
-			open("查看员工", 
-					"${ctx}/employee/detail.do?empId="+empId, 
-					[ '900px','600px' ], 
-					function(index, layero) {
-						//这里面写点击确定后的回调方法
-						var body = top.layer.getChildFrame('body', index);
-						var iframeWin = top[layero.find('iframe')[0]['name']];
-						$.ajax({
-							type:"POST",
-							url:"${ctx}/employee/updateOne",
-							data:body.find("#singleEmp").serialize(),
-							success:function(result){
-								alert("修改员工信息成功");
-							}
-							
-						});
-						
-					});
+			var empId = $(that).attr("emp-id");
+			open("查看员工", "${ctx}/employee/detail.do?empId=" + empId, [ '900px',
+					'600px' ], function(index, layero) {
+				//这里面写点击确定后的回调方法
+				var body = top.layer.getChildFrame('body', index);
+				var iframeWin = top[layero.find('iframe')[0]['name']];
+				$.ajax({
+					type : "POST",
+					url : "${ctx}/employee/updateOne",
+					data : body.find("#singleEmp").serialize(),
+					success : function(result) {
+						alert("修改员工信息成功");
+					}
+
+				});
+
+			});
 		}
 	</script>
 

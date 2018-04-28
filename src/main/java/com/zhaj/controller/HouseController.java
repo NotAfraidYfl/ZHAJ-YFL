@@ -4,13 +4,16 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.zhaj.bean.Employee;
 import com.zhaj.bean.House;
+import com.zhaj.service.EmployeeService;
 import com.zhaj.service.HouseService;
 import com.zhaj.utils.JsonModel;
 import com.zhaj.utils.PageModel;
@@ -21,6 +24,8 @@ import com.zhaj.utils.Utils;
 public class HouseController {
 	@Autowired
 	HouseService houseService;
+	@Autowired
+	EmployeeService employeeService;
 
 	/**
 	 * 房屋列表跳转
@@ -64,7 +69,14 @@ public class HouseController {
 	 * @return
 	 */
 	@RequestMapping("/createHouseView")
-	public String createEmpView() {
+	public String createEmpView(Model model) {
+		try {
+			List<Employee> emps =employeeService.getAll();
+			model.addAttribute("emps",emps);
+		} catch (Exception e) {
+		
+		}
+		
 		return "HouseViews/houseEditAndAdd";
 	}
 

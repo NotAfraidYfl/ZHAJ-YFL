@@ -42,15 +42,16 @@
 			<div class="collapse navbar-collapse"
 				id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
-					<li><a href="${ctx}/home/index.do">首页 <span
-							class="sr-only">(current)</span></a></li>
-					<li class="dropdown"><a
+					<li onclick="navLocated(this,0)"><a
+						href="${ctx}/home/index.do">首页 <span class="sr-only">(current)</span></a></li>
+					<li onclick="navLocated(this,1)" class="dropdown"><a
 						href="${ctx}/department/departmentList.do" class="dropdown-toggle"
 						data-toggle="dropdown" role="button" aria-haspopup="true"
 						aria-expanded="false">部门<span class="caret"></span></a>
 						<ul class="dropdown-menu" id="deptDropMenu"></ul></li>
-					<li><a href="${ctx}/employee/empList.do">员工列表</a></li>
-					<li class="dropdown active"><a href="#"
+					<li onclick="navLocated(this,2)"><a
+						href="${ctx}/employee/empList.do">员工列表</a></li>
+					<li onclick="navLocated(this,3)" class="dropdown"><a href="#"
 						class="dropdown-toggle" data-toggle="dropdown" role="button"
 						aria-haspopup="true" aria-expanded="false">仓库 <span
 							class="caret"></span></a>
@@ -59,12 +60,13 @@
 							<li><a href="3columnsgallery.html">3 Columns Gallery</a></li>
 							<li><a href="4columnsgallery.html">4 Columns Gallery</a></li>
 						</ul></li>
-					<li><a href="blog.html">空间</a></li>
-					<li><a href="codes.html">代码</a></li>
-					<li><a href="contact.html">联系我们</a></li>
+					<li onclick="navLocated(this,4)"><a href="blog.html">空间</a></li>
+					<li onclick="navLocated(this,5)"><a href="codes.html">代码</a></li>
+					<li onclick="navLocated(this,6)"><a href="contact.html">联系我们</a></li>
 				</ul>
 				<div class="house-config">
-					<span><i class="glyphicon glyphicon-home" aria-hidden="true"></i><a
+					<span><i class="glyphicon glyphicon-home" aria-hidden="true"></i><a onclick="changeLocalStorage()"
+						style="text-decoration: none; color: #fff; font-family: cursive;"
 						href="${ctx}/house/houList.do">房源管理</a></span>
 				</div>
 				<div class="clearfix"></div>
@@ -89,6 +91,24 @@
 						$("#deptDropMenu").html(liString);
 					}
 
-				})
+				});
+		var index = localStorage.getItem('index');
+		console.log(index);
+		$(".navbar-nav").children().eq(index).addClass("active");
 	})
+
+	function navLocated(that, index) {
+		$(that).addClass("active");
+		localStorage.setItem('index', index);
+	}
+	function changeLocalStorage() {
+		$(".navbar-nav").children().each(function() {
+			if ($(this).hasClass("active")) {
+				$(this).removeClass("active");
+				$(".navbar-nav").children().unbind();
+				localStorage.removeItem('index');
+			}
+		});
+
+	}
 </script>
