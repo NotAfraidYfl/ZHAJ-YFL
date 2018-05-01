@@ -7,10 +7,10 @@
 <span class="pagination-info">第 ${page.pageNum}页，共${page.pages}页，</span>
 <span class="page-list">每页显示</span>
 <select class='form-control input-sm pageSelect' style='width:65px;display:inline-block'>
-	<option  value='15'>15</option>
-	<option  value='30'>30</option>
-	<option  value='50'>50</option>
-	<option  value='100'>100</option>
+	<option value='10'>10</option>
+	<option value='20'>20</option>
+	<option value='50'>50</option>
+	<option value='100'>100</option>
 </select><span>条</span>
 </div>
 <div class="pageDiy"></div>

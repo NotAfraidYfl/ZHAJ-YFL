@@ -13,7 +13,7 @@
 		<div id="formDiv">
 			<form id="searchForm">
 				<input type="hidden" name="pageNum" id="pageNum" value="1">
-				<input type="hidden" name="pageSize" id="pageSize" value="15">
+				<input type="hidden" name="pageSize" id="pageSize" value="10">
 				<input type="hidden" name="orderBy" id="orderBy"
 					value="create_time desc">
 				<div class="col-xs-12">

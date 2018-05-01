@@ -13,7 +13,7 @@
 		<div id="formDiv">
 			<form id="searchForm">
 				<input type="hidden" name="pageNum" id="pageNum" value="1">
-				<input type="hidden" name="pageSize" id="pageSize" value="15">
+				<input type="hidden" name="pageSize" id="pageSize" value="10">
 				<input type="hidden" name="orderBy" id="orderBy"
 					value="empName desc">
 				<div class="col-xs-12">
@@ -32,7 +32,7 @@
 						<div class="form-inline col-xs-3">
 							<label for="exampleInputFile">性别</label> <select
 								class="form-control" name="empGender">
-								<option value="">不限</option>
+								<option value="0">不限</option>
 								<option value="0">女</option>
 								<option value="1">男</option>
 							</select>
@@ -82,7 +82,7 @@
 	<%@include file="/WEB-INF/views/footer/footer.jsp"%>
 	<script>
 		$(function() {
-			// 请求员工部门的数据的ajax
+			// 请求房源列表的页面
 			$.ajax({
 						type : "GET",
 						url : "${ctx}/department/listJson?pageNum=1",

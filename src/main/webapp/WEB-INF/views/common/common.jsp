@@ -16,9 +16,6 @@
 	rel="stylesheet" />
 <link href="${ctx}/static/cssFramework/style.css" rel='stylesheet'
 	type='text/css' />
-<link
-	href="${ctx}/static/bootstrap/bootstrap-3.3.7-dist/fonts/font-awesome.min.css"
-	rel='stylesheet' type='text/css'>
 <link href="${ctx}/static/commonCss/commonStyle.css" rel='stylesheet'
 	type='text/css' />
 <script type="text/javascript">

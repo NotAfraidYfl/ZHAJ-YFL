@@ -29,7 +29,6 @@ public class HouseController {
 
 	/**
 	 * 房屋列表跳转
-	 * 
 	 * @return
 	 */
 	@RequestMapping("/houList")
@@ -71,10 +70,10 @@ public class HouseController {
 	@RequestMapping("/createHouseView")
 	public String createEmpView(Model model) {
 		try {
-			List<Employee> emps =employeeService.getAll();
-			model.addAttribute("emps",emps);
+			//List<Employee> emps =employeeService.getAll();
+			//model.addAttribute("emps",emps);
 		} catch (Exception e) {
-		
+			e.printStackTrace();
 		}
 		
 		return "HouseViews/houseEditAndAdd";
