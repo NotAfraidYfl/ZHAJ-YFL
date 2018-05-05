@@ -7,7 +7,7 @@
 		<result column="emp_tel" jdbcType="VARCHAR" property="empTel" />
 		<result column="emp_gender" jdbcType="INTEGER" property="empGender" />
 		<result column="emp_email" jdbcType="VARCHAR" property="empEmail" />
-		<result column="d_id" jdbcType="INTEGER" property="dId" />
+		<result column="d_id" jdbcType="VARCHAR" property="dId" />
 	</resultMap>
 
 	<resultMap id="BaseResltMapWithDept" type="com.zhaj.bean.Employee">
@@ -16,7 +16,7 @@
 		<result column="emp_tel" jdbcType="VARCHAR" property="empTel" />
 		<result column="emp_gender" jdbcType="INTEGER" property="empGender" />
 		<result column="emp_email" jdbcType="VARCHAR" property="empEmail" />
-		<result column="d_id" jdbcType="INTEGER" property="dId" />
+		<result column="d_id" jdbcType="VARCHAR" property="dId" />
 		<!-- 关联一个部门信息 -->
 		<association property="department" javaType="com.zhaj.bean.Department">
 			<id column="dept_id" property="deptId" />
@@ -96,6 +96,35 @@
 		e.emp_id, e.emp_name,e.emp_tel, e.emp_gender, e.emp_email,
 		e.d_id,d.dept_id , d.dept_name
 	</sql>
+
+	<select id="selectEmpByFields" parameterType="com.zhaj.bean.Employee"
+		resultMap="BaseResltMapWithDept">
+		SELECT
+		<include refid="withDept_Colum_list" />
+		FROM tb_emp e
+		LEFT JOIN tb_dept d ON e.d_id = d.dept_id
+		<where>
+			<if test="empId != null">
+				emp_id = #{empId,jdbcType=VARCHAR}
+			</if>
+			<if test="empName != null">
+				and emp_name like '%' #{empName,jdbcType=VARCHAR} '%'
+			</if>
+			<if test="empTel != null">
+				and emp_tel =#{empTel,jdbcType=VARCHAR}
+			</if>
+			<if test="empGender != null">
+				and emp_gender =#{empGender,jdbcType=INTEGER}
+			</if>
+			<if test="empEmail != null">
+				and emp_email = #{empEmail,jdbcType=VARCHAR}
+			</if>
+			<if test="dId != null">
+				and d_id =#{dId,jdbcType=VARCHAR}
+			</if>
+		</where>
+
+	</select>
 	<!-- 带条件查询 -->
 	<!-- 带条件查出部门 -->
 	<!-- List<Employee> selectByExampleWithDept(EmployeeExample example); Employee 
@@ -166,7 +195,7 @@
 		(#{empId,jdbcType=VARCHAR}, #{empName,jdbcType=VARCHAR},
 		#{empGender,jdbcType=INTEGER},
 		#{empEmail,jdbcType=VARCHAR},
-		#{dId,jdbcType=INTEGER})
+		#{dId,jdbcType=VARCHAR})
 	</insert>
 	<insert id="insertSelective" parameterType="com.zhaj.bean.Employee">
 		insert into tb_emp
@@ -237,7 +266,7 @@
 				emp_email = #{record.empEmail,jdbcType=VARCHAR},
 			</if>
 			<if test="record.dId != null">
-				d_id = #{record.dId,jdbcType=INTEGER},
+				d_id = #{record.dId,jdbcType=VARCHAR},
 			</if>
 		</set>
 		<if test="_parameter != null">
@@ -291,7 +320,7 @@
 		emp_gender =#{empGender,jdbcType=INTEGER},
 		emp_email = #{empEmail,jdbcType=VARCHAR},
 		d_id =
-		#{dId,jdbcType=INTEGER}
+		#{dId,jdbcType=VARCHAR}
 		where emp_id = #{empId,jdbcType=VARCHAR}
 	</update>
 </mapper>

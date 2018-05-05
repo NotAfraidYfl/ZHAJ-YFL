@@ -6,32 +6,34 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface EmployeeMapper {
-    long countByExample(EmployeeExample example);
+	long countByExample(EmployeeExample example);
 
-    int deleteByExample(EmployeeExample example);
+	int deleteByExample(EmployeeExample example);
 
-    int deleteByPrimaryKey(String empId);
+	int deleteByPrimaryKey(String empId);
 
-    int insert(Employee record);
+	int insert(Employee record);
 
-    int insertSelective(Employee record);
+	int insertSelective(Employee record);
 
-    List<Employee> selectByExample(EmployeeExample example);
+	List<Employee> selectByExample(EmployeeExample example);
 
-    Employee selectByPrimaryKey(String empId);
-    
-//    带部门的条件查询
-    List<Employee> selectByExampleWithDept(EmployeeExample example);
+	Employee selectByPrimaryKey(String empId);
 
-    Employee selectByPrimaryKeyWithDept(String empId);
+	// 带部门的条件查询
+	List<Employee> selectByExampleWithDept(EmployeeExample example);
 
-    int updateByExampleSelective(@Param("record") Employee record, @Param("example") EmployeeExample example);
+	// 条件查询
+	List<Employee> selectEmpByFields(Employee record);
 
-    int updateByExample(@Param("record") Employee record, @Param("example") EmployeeExample example);
+	Employee selectByPrimaryKeyWithDept(String empId);
 
-    int updateByPrimaryKeySelective(Employee record);
+	int updateByExampleSelective(@Param("record") Employee record, @Param("example") EmployeeExample example);
 
-    int updateByPrimaryKey(Employee record);
-    
-    
+	int updateByExample(@Param("record") Employee record, @Param("example") EmployeeExample example);
+
+	int updateByPrimaryKeySelective(Employee record);
+
+	int updateByPrimaryKey(Employee record);
+
 }

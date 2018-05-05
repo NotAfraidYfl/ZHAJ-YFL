@@ -8,7 +8,7 @@ public class Employee {
 	// 员工电话
 	private String empTel;
 	// 员工性别 1男，0女
-	private int empGender;
+	private Integer empGender;
 	// 员工邮箱
 	private String empEmail;
 	// 部门id
@@ -64,11 +64,11 @@ public class Employee {
 		this.empTel = empTel;
 	}
 
-	public int getEmpGender() {
+	public Integer getEmpGender() {
 		return empGender;
 	}
 
-	public void setEmpGender(int empGender) {
+	public void setEmpGender(Integer empGender) {
 		this.empGender = empGender;
 	}
 

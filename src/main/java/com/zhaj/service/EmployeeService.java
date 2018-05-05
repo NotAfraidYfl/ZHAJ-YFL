@@ -25,9 +25,10 @@ public class EmployeeService {
 		return employeeMapper.selectByExampleWithDept(employeeExample);
 	}
 	
-	/*public List<Employee> getAll(Employee emp){
-		return employeeMapper.selectByExampleWithDept(emp);
-	}*/
+	//条件查询
+	public List<Employee> selectEmpByFields(Employee emp){
+		return employeeMapper.selectEmpByFields(emp);
+	}
 
 	/**
 	 * 删除单个员工

@@ -23,9 +23,6 @@
         line-height: 21px !important;
         padding: 6px 15px;
     }
-    .expand-height{
-    	height:900px;
-    }
 </style>
 <script type="text/javascript">
     $(function () {
@@ -45,7 +42,7 @@
         });
 
         if("${page.pages}"=="0"){
-            $(".fixed-table-pagination").prepend("<div class='alert alert-danger diyAlert'>无相关信息</div><div class='expand-height'></div>")
+            $(".fixed-table-pagination").prepend("<div class='alert alert-danger diyAlert'>无相关信息</div>")
             $(".panel-body").css("height","100%");
             $(window).resize(function () {
             $(".panel-body").css("height","100%")
@@ -53,7 +50,6 @@
             $(".pagination-detail").addClass("hide");
         }else{
         	 $(".pagination-detail").removeClass("hide");
-        	 $(".expand-height").remove();
         }
         //排序处理
         $('th.sortable').click(function(){
@@ -99,7 +95,7 @@
             if($(".diyAlert").length>0){
                 return;
             }
-            $(".fixed-table-pagination").prepend("<div class='alert alert-danger diyAlert'>无相关信息</div><div class='expand-height'></div>");
+            $(".fixed-table-pagination").prepend("<div class='alert alert-danger diyAlert'>无相关信息</div>");
             $(".pagination-detail").addClass("hide");
             $(".panel-body").css("height","100%");
             $(window).resize(function () {
@@ -108,7 +104,6 @@
         }else{
             $(".diyAlert").remove();
             $(".pagination-detail").removeClass("hide");
-            $(".expand-height").remove();
             var Wheight = $(window).height() -133 - $("#searchForm").height();
 		    $(".panel-body").css("height",Wheight)
         }
