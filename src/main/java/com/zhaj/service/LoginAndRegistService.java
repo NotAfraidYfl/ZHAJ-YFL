@@ -17,4 +17,8 @@ public class LoginAndRegistService {
 		return loginUserMapper.insertSelective(loginUser);
 	}
 
+	public int login(loginUserId) {
+		return  loginUserMapper.selectByPrimaryKey(loginUserId);
+	}
+
 }

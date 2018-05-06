@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.zhaj.bean.LoginUser;
+import com.zhaj.bean.LoginUserKey;
 import com.zhaj.service.LoginAndRegistService;
 import com.zhaj.utils.JsonModel;
 import com.zhaj.utils.Utils;
@@ -16,7 +17,11 @@ public class LoginAndRegist {
 	@Autowired
 	LoginAndRegistService loginAndRegistService;
 	
-	
+	/**
+	 * 注册接口
+	 * @param loginUser
+	 * @return
+	 */
 	@RequestMapping("regeist")
 	@ResponseBody
 	public JsonModel registration(LoginUser loginUser) {
@@ -36,8 +41,19 @@ public class LoginAndRegist {
 	}
 	
 	@RequestMapping("login")
-	public JsonModel login(){
-		return null;
+	public JsonModel login(LoginUserKey loginUserKey){
+		JsonModel jsonModel = new JsonModel();
+		try {
+			int result = loginAndRegistService.login(loginUserKey.getUserName());
+			jsonModel.setCode(0);
+			jsonModel.setInfo("操作成功");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			jsonModel.setCode(-1);
+			jsonModel.setInfo("操作失败");
+		}
+		return jsonModel;
 		
 	}
 }
