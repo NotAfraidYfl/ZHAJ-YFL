@@ -118,15 +118,25 @@
 						<option value="1">已租/已售</option>
 					</select>
 				</div>
-				<div class="form-group col-xs-6">
-					<label class="col-xs-4">负责员工：</label> <select
-						class="selectpicker form-control input-width-200" name="empId"
-						data-live-search="true">
-						<c:forEach items="${emps}" var="emp">
-							<option value="${emp.empId}">${emp.empName}</option>
-						</c:forEach>
-					</select>
-				</div>
+				<c:if test="${sessionScope.loginUser.userRole==1}">
+					<div class="form-group col-xs-6">
+						<label class="col-xs-4">房源所有者：</label> 
+						<input type="text"	class="form-control input-width-200" name="houseOwnerId"
+						placeholder="" value="$sessionScope.loginUser.userId}">
+					</div> 
+				</c:if>
+				<c:if test="${sessionScope.loginUser.userRole==0}">
+					<div class="form-group col-xs-6">
+						<label class="col-xs-4">房源所有者：</label> 
+						<select
+							class="selectpicker form-control input-width-200" name="houseOwnerId"
+							data-live-search="true">
+							<c:forEach items="${owners}" var="owners">
+								<option value="${owners.userId}">${owners.userName}</option>
+							</c:forEach>
+						</select>
+					</div> 
+				</c:if>
 		</div>
 		</form>
 	</div>

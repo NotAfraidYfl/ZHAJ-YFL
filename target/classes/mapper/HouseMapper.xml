@@ -1,418 +1,527 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zhaj.dao.HouseMapper">
-  <resultMap id="BaseResultMap" type="com.zhaj.bean.House">
-    <id column="houses_id" jdbcType="VARCHAR" property="housesId" />
-    <result column="hou_owner" jdbcType="VARCHAR" property="houOwner" />
-    <result column="owner_tel" jdbcType="VARCHAR" property="ownerTel" />
-    <result column="hou_province" jdbcType="VARCHAR" property="houProvince" />
-    <result column="hou_city" jdbcType="VARCHAR" property="houCity" />
-    <result column="hou_district" jdbcType="VARCHAR" property="houDistrict" />
-    <result column="hou_detail" jdbcType="VARCHAR" property="houDetail" />
-    <result column="hou_description" jdbcType="VARCHAR" property="houDescription" />
-    <result column="owener_email" jdbcType="VARCHAR" property="owenerEmail" />
-    <result column="hou_photos" jdbcType="VARCHAR" property="houPhotos" />
-    <result column="hou_price" jdbcType="REAL" property="houPrice" />
-    <result column="put_date" jdbcType="TIMESTAMP" property="putDate" />
-    <result column="hou_floor" jdbcType="INTEGER" property="houFloor" />
-    <result column="total_floors" jdbcType="INTEGER" property="totalFloors" />
-    <result column="hou_type" jdbcType="INTEGER" property="houType" />
-    <result column="hou_catg" jdbcType="INTEGER" property="houCatg" />
-    <result column="emp_id" jdbcType="VARCHAR" property="empId" />
-    <result column="hou_status" jdbcType="INTEGER" property="houStatus" />
-  </resultMap>
-  <sql id="Example_Where_Clause">
-    <where>
-      <foreach collection="oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause">
-    <where>
-      <foreach collection="example.oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Base_Column_List">
-    houses_id, hou_owner, owner_tel, hou_province, hou_city, hou_district, hou_detail, 
-    hou_description, owener_email, hou_photos, hou_price, put_date, hou_floor, total_floors, 
-    hou_type, hou_catg, emp_id, hou_status
-  </sql>
-  <select id="selectByExample" parameterType="com.zhaj.bean.HouseExample" resultMap="BaseResultMap">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from tb_houses
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from tb_houses
-    where houses_id = #{housesId,jdbcType=VARCHAR}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from tb_houses
-    where houses_id = #{housesId,jdbcType=VARCHAR}
-  </delete>
-  <delete id="deleteByExample" parameterType="com.zhaj.bean.HouseExample">
-    delete from tb_houses
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
-  <insert id="insert" parameterType="com.zhaj.bean.House">
-    insert into tb_houses (houses_id, hou_owner, owner_tel, 
-      hou_province, hou_city, hou_district, 
-      hou_detail, hou_description, owener_email, 
-      hou_photos, hou_price, put_date, 
-      hou_floor, total_floors, hou_type, 
-      hou_catg, emp_id, hou_status
-      )
-    values (#{housesId,jdbcType=VARCHAR}, #{houOwner,jdbcType=VARCHAR}, #{ownerTel,jdbcType=VARCHAR}, 
-      #{houProvince,jdbcType=VARCHAR}, #{houCity,jdbcType=VARCHAR}, #{houDistrict,jdbcType=VARCHAR}, 
-      #{houDetail,jdbcType=VARCHAR}, #{houDescription,jdbcType=VARCHAR}, #{owenerEmail,jdbcType=VARCHAR}, 
-      #{houPhotos,jdbcType=VARCHAR}, #{houPrice,jdbcType=REAL}, #{putDate,jdbcType=TIMESTAMP}, 
-      #{houFloor,jdbcType=INTEGER}, #{totalFloors,jdbcType=INTEGER}, #{houType,jdbcType=INTEGER}, 
-      #{houCatg,jdbcType=INTEGER}, #{empId,jdbcType=VARCHAR}, #{houStatus,jdbcType=INTEGER}
-      )
-  </insert>
-  <insert id="insertSelective" parameterType="com.zhaj.bean.House">
-    insert into tb_houses
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="housesId != null">
-        houses_id,
-      </if>
-      <if test="houOwner != null">
-        hou_owner,
-      </if>
-      <if test="ownerTel != null">
-        owner_tel,
-      </if>
-      <if test="houProvince != null">
-        hou_province,
-      </if>
-      <if test="houCity != null">
-        hou_city,
-      </if>
-      <if test="houDistrict != null">
-        hou_district,
-      </if>
-      <if test="houDetail != null">
-        hou_detail,
-      </if>
-      <if test="houDescription != null">
-        hou_description,
-      </if>
-      <if test="owenerEmail != null">
-        owener_email,
-      </if>
-      <if test="houPhotos != null">
-        hou_photos,
-      </if>
-      <if test="houPrice != null">
-        hou_price,
-      </if>
-      <if test="putDate != null">
-        put_date,
-      </if>
-      <if test="houFloor != null">
-        hou_floor,
-      </if>
-      <if test="totalFloors != null">
-        total_floors,
-      </if>
-      <if test="houType != null">
-        hou_type,
-      </if>
-      <if test="houCatg != null">
-        hou_catg,
-      </if>
-      <if test="empId != null">
-        emp_id,
-      </if>
-      <if test="houStatus != null">
-        hou_status,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="housesId != null">
-        #{housesId,jdbcType=VARCHAR},
-      </if>
-      <if test="houOwner != null">
-        #{houOwner,jdbcType=VARCHAR},
-      </if>
-      <if test="ownerTel != null">
-        #{ownerTel,jdbcType=VARCHAR},
-      </if>
-      <if test="houProvince != null">
-        #{houProvince,jdbcType=VARCHAR},
-      </if>
-      <if test="houCity != null">
-        #{houCity,jdbcType=VARCHAR},
-      </if>
-      <if test="houDistrict != null">
-        #{houDistrict,jdbcType=VARCHAR},
-      </if>
-      <if test="houDetail != null">
-        #{houDetail,jdbcType=VARCHAR},
-      </if>
-      <if test="houDescription != null">
-        #{houDescription,jdbcType=VARCHAR},
-      </if>
-      <if test="owenerEmail != null">
-        #{owenerEmail,jdbcType=VARCHAR},
-      </if>
-      <if test="houPhotos != null">
-        #{houPhotos,jdbcType=VARCHAR},
-      </if>
-      <if test="houPrice != null">
-        #{houPrice,jdbcType=REAL},
-      </if>
-      <if test="putDate != null">
-        #{putDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="houFloor != null">
-        #{houFloor,jdbcType=INTEGER},
-      </if>
-      <if test="totalFloors != null">
-        #{totalFloors,jdbcType=INTEGER},
-      </if>
-      <if test="houType != null">
-        #{houType,jdbcType=INTEGER},
-      </if>
-      <if test="houCatg != null">
-        #{houCatg,jdbcType=INTEGER},
-      </if>
-      <if test="empId != null">
-        #{empId,jdbcType=VARCHAR},
-      </if>
-      <if test="houStatus != null">
-        #{houStatus,jdbcType=INTEGER},
-      </if>
-    </trim>
-  </insert>
-  <select id="countByExample" parameterType="com.zhaj.bean.HouseExample" resultType="java.lang.Long">
-    select count(*) from tb_houses
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map">
-    update tb_houses
-    <set>
-      <if test="record.housesId != null">
-        houses_id = #{record.housesId,jdbcType=VARCHAR},
-      </if>
-      <if test="record.houOwner != null">
-        hou_owner = #{record.houOwner,jdbcType=VARCHAR},
-      </if>
-      <if test="record.ownerTel != null">
-        owner_tel = #{record.ownerTel,jdbcType=VARCHAR},
-      </if>
-      <if test="record.houProvince != null">
-        hou_province = #{record.houProvince,jdbcType=VARCHAR},
-      </if>
-      <if test="record.houCity != null">
-        hou_city = #{record.houCity,jdbcType=VARCHAR},
-      </if>
-      <if test="record.houDistrict != null">
-        hou_district = #{record.houDistrict,jdbcType=VARCHAR},
-      </if>
-      <if test="record.houDetail != null">
-        hou_detail = #{record.houDetail,jdbcType=VARCHAR},
-      </if>
-      <if test="record.houDescription != null">
-        hou_description = #{record.houDescription,jdbcType=VARCHAR},
-      </if>
-      <if test="record.owenerEmail != null">
-        owener_email = #{record.owenerEmail,jdbcType=VARCHAR},
-      </if>
-      <if test="record.houPhotos != null">
-        hou_photos = #{record.houPhotos,jdbcType=VARCHAR},
-      </if>
-      <if test="record.houPrice != null">
-        hou_price = #{record.houPrice,jdbcType=REAL},
-      </if>
-      <if test="record.putDate != null">
-        put_date = #{record.putDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.houFloor != null">
-        hou_floor = #{record.houFloor,jdbcType=INTEGER},
-      </if>
-      <if test="record.totalFloors != null">
-        total_floors = #{record.totalFloors,jdbcType=INTEGER},
-      </if>
-      <if test="record.houType != null">
-        hou_type = #{record.houType,jdbcType=INTEGER},
-      </if>
-      <if test="record.houCatg != null">
-        hou_catg = #{record.houCatg,jdbcType=INTEGER},
-      </if>
-      <if test="record.empId != null">
-        emp_id = #{record.empId,jdbcType=VARCHAR},
-      </if>
-      <if test="record.houStatus != null">
-        hou_status = #{record.houStatus,jdbcType=INTEGER},
-      </if>
-    </set>
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map">
-    update tb_houses
-    set houses_id = #{record.housesId,jdbcType=VARCHAR},
-      hou_owner = #{record.houOwner,jdbcType=VARCHAR},
-      owner_tel = #{record.ownerTel,jdbcType=VARCHAR},
-      hou_province = #{record.houProvince,jdbcType=VARCHAR},
-      hou_city = #{record.houCity,jdbcType=VARCHAR},
-      hou_district = #{record.houDistrict,jdbcType=VARCHAR},
-      hou_detail = #{record.houDetail,jdbcType=VARCHAR},
-      hou_description = #{record.houDescription,jdbcType=VARCHAR},
-      owener_email = #{record.owenerEmail,jdbcType=VARCHAR},
-      hou_photos = #{record.houPhotos,jdbcType=VARCHAR},
-      hou_price = #{record.houPrice,jdbcType=REAL},
-      put_date = #{record.putDate,jdbcType=TIMESTAMP},
-      hou_floor = #{record.houFloor,jdbcType=INTEGER},
-      total_floors = #{record.totalFloors,jdbcType=INTEGER},
-      hou_type = #{record.houType,jdbcType=INTEGER},
-      hou_catg = #{record.houCatg,jdbcType=INTEGER},
-      emp_id = #{record.empId,jdbcType=VARCHAR},
-      hou_status = #{record.houStatus,jdbcType=INTEGER}
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.zhaj.bean.House">
-    update tb_houses
-    <set>
-      <if test="houOwner != null">
-        hou_owner = #{houOwner,jdbcType=VARCHAR},
-      </if>
-      <if test="ownerTel != null">
-        owner_tel = #{ownerTel,jdbcType=VARCHAR},
-      </if>
-      <if test="houProvince != null">
-        hou_province = #{houProvince,jdbcType=VARCHAR},
-      </if>
-      <if test="houCity != null">
-        hou_city = #{houCity,jdbcType=VARCHAR},
-      </if>
-      <if test="houDistrict != null">
-        hou_district = #{houDistrict,jdbcType=VARCHAR},
-      </if>
-      <if test="houDetail != null">
-        hou_detail = #{houDetail,jdbcType=VARCHAR},
-      </if>
-      <if test="houDescription != null">
-        hou_description = #{houDescription,jdbcType=VARCHAR},
-      </if>
-      <if test="owenerEmail != null">
-        owener_email = #{owenerEmail,jdbcType=VARCHAR},
-      </if>
-      <if test="houPhotos != null">
-        hou_photos = #{houPhotos,jdbcType=VARCHAR},
-      </if>
-      <if test="houPrice != null">
-        hou_price = #{houPrice,jdbcType=REAL},
-      </if>
-      <if test="putDate != null">
-        put_date = #{putDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="houFloor != null">
-        hou_floor = #{houFloor,jdbcType=INTEGER},
-      </if>
-      <if test="totalFloors != null">
-        total_floors = #{totalFloors,jdbcType=INTEGER},
-      </if>
-      <if test="houType != null">
-        hou_type = #{houType,jdbcType=INTEGER},
-      </if>
-      <if test="houCatg != null">
-        hou_catg = #{houCatg,jdbcType=INTEGER},
-      </if>
-      <if test="empId != null">
-        emp_id = #{empId,jdbcType=VARCHAR},
-      </if>
-      <if test="houStatus != null">
-        hou_status = #{houStatus,jdbcType=INTEGER},
-      </if>
-    </set>
-    where houses_id = #{housesId,jdbcType=VARCHAR}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.zhaj.bean.House">
-    update tb_houses
-    set hou_owner = #{houOwner,jdbcType=VARCHAR},
-      owner_tel = #{ownerTel,jdbcType=VARCHAR},
-      hou_province = #{houProvince,jdbcType=VARCHAR},
-      hou_city = #{houCity,jdbcType=VARCHAR},
-      hou_district = #{houDistrict,jdbcType=VARCHAR},
-      hou_detail = #{houDetail,jdbcType=VARCHAR},
-      hou_description = #{houDescription,jdbcType=VARCHAR},
-      owener_email = #{owenerEmail,jdbcType=VARCHAR},
-      hou_photos = #{houPhotos,jdbcType=VARCHAR},
-      hou_price = #{houPrice,jdbcType=REAL},
-      put_date = #{putDate,jdbcType=TIMESTAMP},
-      hou_floor = #{houFloor,jdbcType=INTEGER},
-      total_floors = #{totalFloors,jdbcType=INTEGER},
-      hou_type = #{houType,jdbcType=INTEGER},
-      hou_catg = #{houCatg,jdbcType=INTEGER},
-      emp_id = #{empId,jdbcType=VARCHAR},
-      hou_status = #{houStatus,jdbcType=INTEGER}
-    where houses_id = #{housesId,jdbcType=VARCHAR}
-  </update>
+	<resultMap id="BaseResultMap" type="com.zhaj.bean.House">
+		<id column="houses_id" jdbcType="VARCHAR" property="housesId" />
+		<result column="hou_owner" jdbcType="VARCHAR" property="houOwner" />
+		<result column="owner_tel" jdbcType="VARCHAR" property="ownerTel" />
+		<result column="hou_province" jdbcType="VARCHAR" property="houProvince" />
+		<result column="hou_city" jdbcType="VARCHAR" property="houCity" />
+		<result column="hou_district" jdbcType="VARCHAR" property="houDistrict" />
+		<result column="hou_detail" jdbcType="VARCHAR" property="houDetail" />
+		<result column="hou_description" jdbcType="VARCHAR" property="houDescription" />
+		<result column="owener_email" jdbcType="VARCHAR" property="owenerEmail" />
+		<result column="hou_photos" jdbcType="VARCHAR" property="houPhotos" />
+		<result column="hou_price" jdbcType="REAL" property="houPrice" />
+		<result column="put_date" jdbcType="TIMESTAMP" property="putDate" />
+		<result column="hou_floor" jdbcType="INTEGER" property="houFloor" />
+		<result column="total_floors" jdbcType="INTEGER" property="totalFloors" />
+		<result column="hou_type" jdbcType="INTEGER" property="houType" />
+		<result column="hou_catg" jdbcType="INTEGER" property="houCatg" />
+		<result column="house_owner_id" jdbcType="VARCHAR" property="houseOwnerId" />
+		<result column="hou_status" jdbcType="INTEGER" property="houStatus" />
+	</resultMap>
+
+	<resultMap id="BaseResultWithLiginUserMap" type="com.zhaj.bean.House">
+		<id column="houses_id" jdbcType="VARCHAR" property="housesId" />
+		<result column="hou_owner" jdbcType="VARCHAR" property="houOwner" />
+		<result column="owner_tel" jdbcType="VARCHAR" property="ownerTel" />
+		<result column="hou_province" jdbcType="VARCHAR" property="houProvince" />
+		<result column="hou_city" jdbcType="VARCHAR" property="houCity" />
+		<result column="hou_district" jdbcType="VARCHAR" property="houDistrict" />
+		<result column="hou_detail" jdbcType="VARCHAR" property="houDetail" />
+		<result column="hou_description" jdbcType="VARCHAR" property="houDescription" />
+		<result column="owener_email" jdbcType="VARCHAR" property="owenerEmail" />
+		<result column="hou_photos" jdbcType="VARCHAR" property="houPhotos" />
+		<result column="hou_price" jdbcType="REAL" property="houPrice" />
+		<result column="put_date" jdbcType="TIMESTAMP" property="putDate" />
+		<result column="hou_floor" jdbcType="INTEGER" property="houFloor" />
+		<result column="total_floors" jdbcType="INTEGER" property="totalFloors" />
+		<result column="hou_type" jdbcType="INTEGER" property="houType" />
+		<result column="hou_catg" jdbcType="INTEGER" property="houCatg" />
+		<result column="house_owner_id" jdbcType="VARCHAR" property="houseOwnerId" />
+		<result column="hou_status" jdbcType="INTEGER" property="houStatus" />
+		<!-- 关联一个用户信息 -->
+		<association property="loginUser" javaType="com.zhaj.bean.LoginUser">
+			<id column="user_id" jdbcType="VARCHAR" property="userId" />
+			<id column="user_name" jdbcType="VARCHAR" property="userName" />
+			<result column="user_password" jdbcType="VARCHAR" property="userPassword" />
+			<result column="user_email" jdbcType="VARCHAR" property="userEmail" />
+			<result column="user_tel" jdbcType="VARCHAR" property="userTel" />
+			<result column="user_role" jdbcType="INTEGER" property="userRole" />
+		</association>
+
+	</resultMap>
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" prefixOverrides="and" suffix=")">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach close=")" collection="criterion.value" item="listItem"
+										open="(" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" prefixOverrides="and" suffix=")">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach close=")" collection="criterion.value" item="listItem"
+										open="(" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		houses_id, hou_owner, owner_tel, hou_province, hou_city, hou_district,
+		hou_detail,
+		hou_description, owener_email, hou_photos, hou_price, put_date, hou_floor,
+		total_floors,
+		hou_type, hou_catg, house_owner_id, hou_status
+	</sql>
+	<select id="selectByExample" parameterType="com.zhaj.bean.HouseExample"
+		resultMap="BaseResultMap">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from tb_houses
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+	
+	<select id="selectHousesByFields" parameterType="com.zhaj.bean.House"
+		resultMap="BaseResultWithLiginUserMap">
+		select
+		<include refid="Base_Column_List" />
+		from tb_houses h
+		LEFT JOIN tb_login_user l ON l.user_id = h.house_owner_id
+		<where>
+			<if test="housesId != null">
+				houses_id,
+			</if>
+			<if test="houOwner != null">
+				hou_owner,
+			</if>
+			<if test="ownerTel != null">
+				owner_tel,
+			</if>
+			<if test="houProvince != null">
+				hou_province,
+			</if>
+			<if test="houCity != null">
+				hou_city,
+			</if>
+			<if test="houDistrict != null">
+				hou_district,
+			</if>
+			<if test="houDetail != null">
+				hou_detail,
+			</if>
+			<if test="houDescription != null">
+				hou_description,
+			</if>
+			<if test="owenerEmail != null">
+				owener_email,
+			</if>
+			<if test="houPhotos != null">
+				hou_photos,
+			</if>
+			<if test="houPrice != null">
+				hou_price,
+			</if>
+			<if test="putDate != null">
+				put_date,
+			</if>
+			<if test="houFloor != null">
+				hou_floor,
+			</if>
+			<if test="totalFloors != null">
+				total_floors,
+			</if>
+			<if test="houType != null">
+				hou_type,
+			</if>
+			<if test="houCatg != null">
+				hou_catg,
+			</if>
+			<if test="houseOwnerId != null">
+				house_owner_id,
+			</if>
+			<if test="houStatus != null">
+				hou_status,
+			</if>
+		</where>
+	</select>
+	
+	<select id="selectByPrimaryKey" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from tb_houses
+		where houses_id = #{housesId,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from tb_houses
+		where houses_id = #{housesId,jdbcType=VARCHAR}
+	</delete>
+	<delete id="deleteByExample" parameterType="com.zhaj.bean.HouseExample">
+		delete from tb_houses
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</delete>
+	<insert id="insert" parameterType="com.zhaj.bean.House">
+		insert into tb_houses (houses_id, hou_owner, owner_tel,
+		hou_province, hou_city, hou_district,
+		hou_detail, hou_description, owener_email,
+		hou_photos, hou_price, put_date,
+		hou_floor, total_floors, hou_type,
+		hou_catg, house_owner_id, hou_status
+		)
+		values (#{housesId,jdbcType=VARCHAR}, #{houOwner,jdbcType=VARCHAR},
+		#{ownerTel,jdbcType=VARCHAR},
+		#{houProvince,jdbcType=VARCHAR}, #{houCity,jdbcType=VARCHAR}, #{houDistrict,jdbcType=VARCHAR},
+		#{houDetail,jdbcType=VARCHAR}, #{houDescription,jdbcType=VARCHAR},
+		#{owenerEmail,jdbcType=VARCHAR},
+		#{houPhotos,jdbcType=VARCHAR}, #{houPrice,jdbcType=REAL}, #{putDate,jdbcType=TIMESTAMP},
+		#{houFloor,jdbcType=INTEGER}, #{totalFloors,jdbcType=INTEGER},
+		#{houType,jdbcType=INTEGER},
+		#{houCatg,jdbcType=INTEGER}, #{houseOwnerId,jdbcType=VARCHAR}, #{houStatus,jdbcType=INTEGER}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.zhaj.bean.House">
+		insert into tb_houses
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="housesId != null">
+				houses_id,
+			</if>
+			<if test="houOwner != null">
+				hou_owner,
+			</if>
+			<if test="ownerTel != null">
+				owner_tel,
+			</if>
+			<if test="houProvince != null">
+				hou_province,
+			</if>
+			<if test="houCity != null">
+				hou_city,
+			</if>
+			<if test="houDistrict != null">
+				hou_district,
+			</if>
+			<if test="houDetail != null">
+				hou_detail,
+			</if>
+			<if test="houDescription != null">
+				hou_description,
+			</if>
+			<if test="owenerEmail != null">
+				owener_email,
+			</if>
+			<if test="houPhotos != null">
+				hou_photos,
+			</if>
+			<if test="houPrice != null">
+				hou_price,
+			</if>
+			<if test="putDate != null">
+				put_date,
+			</if>
+			<if test="houFloor != null">
+				hou_floor,
+			</if>
+			<if test="totalFloors != null">
+				total_floors,
+			</if>
+			<if test="houType != null">
+				hou_type,
+			</if>
+			<if test="houCatg != null">
+				hou_catg,
+			</if>
+			<if test="houseOwnerId != null">
+				house_owner_id,
+			</if>
+			<if test="houStatus != null">
+				hou_status,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="housesId != null">
+				#{housesId,jdbcType=VARCHAR},
+			</if>
+			<if test="houOwner != null">
+				#{houOwner,jdbcType=VARCHAR},
+			</if>
+			<if test="ownerTel != null">
+				#{ownerTel,jdbcType=VARCHAR},
+			</if>
+			<if test="houProvince != null">
+				#{houProvince,jdbcType=VARCHAR},
+			</if>
+			<if test="houCity != null">
+				#{houCity,jdbcType=VARCHAR},
+			</if>
+			<if test="houDistrict != null">
+				#{houDistrict,jdbcType=VARCHAR},
+			</if>
+			<if test="houDetail != null">
+				#{houDetail,jdbcType=VARCHAR},
+			</if>
+			<if test="houDescription != null">
+				#{houDescription,jdbcType=VARCHAR},
+			</if>
+			<if test="owenerEmail != null">
+				#{owenerEmail,jdbcType=VARCHAR},
+			</if>
+			<if test="houPhotos != null">
+				#{houPhotos,jdbcType=VARCHAR},
+			</if>
+			<if test="houPrice != null">
+				#{houPrice,jdbcType=REAL},
+			</if>
+			<if test="putDate != null">
+				#{putDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="houFloor != null">
+				#{houFloor,jdbcType=INTEGER},
+			</if>
+			<if test="totalFloors != null">
+				#{totalFloors,jdbcType=INTEGER},
+			</if>
+			<if test="houType != null">
+				#{houType,jdbcType=INTEGER},
+			</if>
+			<if test="houCatg != null">
+				#{houCatg,jdbcType=INTEGER},
+			</if>
+			<if test="houseOwnerId != null">
+				#{houseOwnerId,jdbcType=VARCHAR},
+			</if>
+			<if test="houStatus != null">
+				#{houStatus,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<select id="countByExample" parameterType="com.zhaj.bean.HouseExample"
+		resultType="java.lang.Long">
+		select count(*) from tb_houses
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</select>
+	<update id="updateByExampleSelective" parameterType="map">
+		update tb_houses
+		<set>
+			<if test="record.housesId != null">
+				houses_id = #{record.housesId,jdbcType=VARCHAR},
+			</if>
+			<if test="record.houOwner != null">
+				hou_owner = #{record.houOwner,jdbcType=VARCHAR},
+			</if>
+			<if test="record.ownerTel != null">
+				owner_tel = #{record.ownerTel,jdbcType=VARCHAR},
+			</if>
+			<if test="record.houProvince != null">
+				hou_province = #{record.houProvince,jdbcType=VARCHAR},
+			</if>
+			<if test="record.houCity != null">
+				hou_city = #{record.houCity,jdbcType=VARCHAR},
+			</if>
+			<if test="record.houDistrict != null">
+				hou_district = #{record.houDistrict,jdbcType=VARCHAR},
+			</if>
+			<if test="record.houDetail != null">
+				hou_detail = #{record.houDetail,jdbcType=VARCHAR},
+			</if>
+			<if test="record.houDescription != null">
+				hou_description = #{record.houDescription,jdbcType=VARCHAR},
+			</if>
+			<if test="record.owenerEmail != null">
+				owener_email = #{record.owenerEmail,jdbcType=VARCHAR},
+			</if>
+			<if test="record.houPhotos != null">
+				hou_photos = #{record.houPhotos,jdbcType=VARCHAR},
+			</if>
+			<if test="record.houPrice != null">
+				hou_price = #{record.houPrice,jdbcType=REAL},
+			</if>
+			<if test="record.putDate != null">
+				put_date = #{record.putDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="record.houFloor != null">
+				hou_floor = #{record.houFloor,jdbcType=INTEGER},
+			</if>
+			<if test="record.totalFloors != null">
+				total_floors = #{record.totalFloors,jdbcType=INTEGER},
+			</if>
+			<if test="record.houType != null">
+				hou_type = #{record.houType,jdbcType=INTEGER},
+			</if>
+			<if test="record.houCatg != null">
+				hou_catg = #{record.houCatg,jdbcType=INTEGER},
+			</if>
+			<if test="record.houseOwnerId != null">
+				house_owner_id = #{record.houseOwnerId,jdbcType=VARCHAR},
+			</if>
+			<if test="record.houStatus != null">
+				hou_status = #{record.houStatus,jdbcType=INTEGER},
+			</if>
+		</set>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByExample" parameterType="map">
+		update tb_houses
+		set houses_id = #{record.housesId,jdbcType=VARCHAR},
+		hou_owner = #{record.houOwner,jdbcType=VARCHAR},
+		owner_tel = #{record.ownerTel,jdbcType=VARCHAR},
+		hou_province = #{record.houProvince,jdbcType=VARCHAR},
+		hou_city = #{record.houCity,jdbcType=VARCHAR},
+		hou_district = #{record.houDistrict,jdbcType=VARCHAR},
+		hou_detail = #{record.houDetail,jdbcType=VARCHAR},
+		hou_description = #{record.houDescription,jdbcType=VARCHAR},
+		owener_email = #{record.owenerEmail,jdbcType=VARCHAR},
+		hou_photos = #{record.houPhotos,jdbcType=VARCHAR},
+		hou_price = #{record.houPrice,jdbcType=REAL},
+		put_date = #{record.putDate,jdbcType=TIMESTAMP},
+		hou_floor = #{record.houFloor,jdbcType=INTEGER},
+		total_floors = #{record.totalFloors,jdbcType=INTEGER},
+		hou_type = #{record.houType,jdbcType=INTEGER},
+		hou_catg = #{record.houCatg,jdbcType=INTEGER},
+		house_owner_id = #{record.houseOwnerId,jdbcType=VARCHAR},
+		hou_status = #{record.houStatus,jdbcType=INTEGER}
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByPrimaryKeySelective" parameterType="com.zhaj.bean.House">
+		update tb_houses
+		<set>
+			<if test="houOwner != null">
+				hou_owner = #{houOwner,jdbcType=VARCHAR},
+			</if>
+			<if test="ownerTel != null">
+				owner_tel = #{ownerTel,jdbcType=VARCHAR},
+			</if>
+			<if test="houProvince != null">
+				hou_province = #{houProvince,jdbcType=VARCHAR},
+			</if>
+			<if test="houCity != null">
+				hou_city = #{houCity,jdbcType=VARCHAR},
+			</if>
+			<if test="houDistrict != null">
+				hou_district = #{houDistrict,jdbcType=VARCHAR},
+			</if>
+			<if test="houDetail != null">
+				hou_detail = #{houDetail,jdbcType=VARCHAR},
+			</if>
+			<if test="houDescription != null">
+				hou_description = #{houDescription,jdbcType=VARCHAR},
+			</if>
+			<if test="owenerEmail != null">
+				owener_email = #{owenerEmail,jdbcType=VARCHAR},
+			</if>
+			<if test="houPhotos != null">
+				hou_photos = #{houPhotos,jdbcType=VARCHAR},
+			</if>
+			<if test="houPrice != null">
+				hou_price = #{houPrice,jdbcType=REAL},
+			</if>
+			<if test="putDate != null">
+				put_date = #{putDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="houFloor != null">
+				hou_floor = #{houFloor,jdbcType=INTEGER},
+			</if>
+			<if test="totalFloors != null">
+				total_floors = #{totalFloors,jdbcType=INTEGER},
+			</if>
+			<if test="houType != null">
+				hou_type = #{houType,jdbcType=INTEGER},
+			</if>
+			<if test="houCatg != null">
+				hou_catg = #{houCatg,jdbcType=INTEGER},
+			</if>
+			<if test="houseOwnerId != null">
+				house_owner_id = #{houseOwnerId,jdbcType=VARCHAR},
+			</if>
+			<if test="houStatus != null">
+				hou_status = #{houStatus,jdbcType=INTEGER},
+			</if>
+		</set>
+		where houses_id = #{housesId,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.zhaj.bean.House">
+		update tb_houses
+		set hou_owner = #{houOwner,jdbcType=VARCHAR},
+		owner_tel = #{ownerTel,jdbcType=VARCHAR},
+		hou_province = #{houProvince,jdbcType=VARCHAR},
+		hou_city = #{houCity,jdbcType=VARCHAR},
+		hou_district = #{houDistrict,jdbcType=VARCHAR},
+		hou_detail = #{houDetail,jdbcType=VARCHAR},
+		hou_description = #{houDescription,jdbcType=VARCHAR},
+		owener_email = #{owenerEmail,jdbcType=VARCHAR},
+		hou_photos = #{houPhotos,jdbcType=VARCHAR},
+		hou_price = #{houPrice,jdbcType=REAL},
+		put_date = #{putDate,jdbcType=TIMESTAMP},
+		hou_floor = #{houFloor,jdbcType=INTEGER},
+		total_floors = #{totalFloors,jdbcType=INTEGER},
+		hou_type = #{houType,jdbcType=INTEGER},
+		hou_catg = #{houCatg,jdbcType=INTEGER},
+		house_owner_id = #{houseOwnerId,jdbcType=VARCHAR},
+		hou_status = #{houStatus,jdbcType=INTEGER}
+		where houses_id = #{housesId,jdbcType=VARCHAR}
+	</update>
 </mapper>

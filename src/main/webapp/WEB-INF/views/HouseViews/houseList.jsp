@@ -5,7 +5,7 @@
 <html>
 <head>
 <%@include file="/WEB-INF/views/common/common.jsp"%>
-<title>员工列表页面</title>
+<title>房源列表页面</title>
 </head>
 <body>
 	<%@include file="/WEB-INF/views/header/header.jsp"%>
@@ -19,34 +19,33 @@
 				<div class="col-xs-12">
 					<div id="container" class="form-inline">
 						<div class="form-inline col-xs-3">
-							<label class="text-right">员工姓名：</label> <input name="name"
-								type="text" class=" form-control" placeholder="请输入公司名称"
-								value="${company.name}">
-						</div>
-						<div class="form-inline col-xs-3">
-							<label for="exampleInputFile">所属部门：</label> <select
-								class="form-control" name="d_id">
-								<option value=""></option>
-							</select>
-						</div>
-						<div class="form-inline col-xs-3">
-							<label for="exampleInputFile">性别</label> <select
-								class="form-control">
-								<option value="0">女</option>
-								<option value="1">男</option>
-							</select>
-						</div>
-						<div class="form-inline col-xs-3">
-							<label class="text-right">员工ID：</label> <input name="name"
-								type="text" class=" form-control" placeholder="请输入公司名称"
-								value="${company.name}">
-						</div>
-						<div class="btn-group folat-right">
-							<button class="btn btn-default" type="button"
-								onclick="createHouse();">
+								<label class="text-right">房东用户名：</label> <input name="empName" type="text" class=" form-control" placeholder="请输入员工姓名" value="">
+							</div>
+							<div class="form-inline col-xs-2">
+								<label>总楼层：</label>
+								<select class="form-control" name="houType">
+									<option value="">不限</option>
+								</select>
+							</div>
+							<div class="form-inline col-xs-2">
+								<label>房屋类别</label>
+								<select class="form-control" name="houType">
+									<option value="">不限</option>
+									<option value="0">二手房</option>
+									<option value="1">出租房</option>
+								</select>
+							</div>
+							<div class="form-inline col-xs-3">
+								<label class="text-right">员工ID：</label> <input name="name" type="text" class=" form-control" placeholder="请输入公司名称" value="">
+							</div>
+							<div class="btn-group pull-right">
+								<button class="btn btn-default" type="button" onclick="createEmp();">
 								<i class="glyphicon glyphicon-plus"></i>创 建
 							</button>
-						</div>
+								<button class="btn btn-default" type="button" onclick="page(1);">
+								<i class="glyphicon glyphicon-search"></i>搜索
+							</button>
+							</div>
 					</div>
 				</div>
 			</form>
@@ -99,8 +98,9 @@
 			//请求员工列表的数据的ajax
 			$.ajax({
 				type : "GET",
-				url : "${ctx}/",
+				url : "${ctx}/house/listJson.do",
 				success : function(result) {
+					console.log(result.data.list);
 				}
 
 			})

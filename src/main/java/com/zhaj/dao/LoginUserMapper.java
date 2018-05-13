@@ -20,6 +20,8 @@ public interface LoginUserMapper {
     List<LoginUser> selectByExample(LoginUserExample example);
 
     LoginUser selectByPrimaryKey(LoginUserKey key);
+    
+    LoginUser selectByUserName(String userName);
 
     int updateByExampleSelective(@Param("record") LoginUser record, @Param("example") LoginUserExample example);
 

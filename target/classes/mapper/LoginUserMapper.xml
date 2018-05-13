@@ -92,7 +92,7 @@
       and user_name = #{userName,jdbcType=VARCHAR}
   </select>
   <!-- 通过用户名查询 -->
-   <select id="selectByUserName" parameterType="VARCHAR" resultMap="BaseResultMap">
+   <select id="selectByUserName" parameterType="String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from tb_login_user

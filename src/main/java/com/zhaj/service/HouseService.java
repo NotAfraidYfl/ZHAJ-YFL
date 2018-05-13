@@ -13,8 +13,8 @@ public class HouseService {
 	@Autowired
 	HouseMapper houseMapper;
 
-	public List<House> getAll() {
-		return houseMapper.selectByExample(null);
+	public List<House> getAll(House hou) {
+		return houseMapper.selectHousesByFields(hou);
 	}
 
 	public void insertOneHouse(House house) {

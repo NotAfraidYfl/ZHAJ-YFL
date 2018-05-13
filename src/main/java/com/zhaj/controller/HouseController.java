@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.zhaj.bean.Employee;
 import com.zhaj.bean.House;
-import com.zhaj.service.EmployeeService;
+import com.zhaj.bean.LoginUser;
 import com.zhaj.service.HouseService;
+import com.zhaj.service.LoginAndRegistService;
 import com.zhaj.utils.JsonModel;
 import com.zhaj.utils.PageModel;
 import com.zhaj.utils.Utils;
@@ -25,7 +25,7 @@ public class HouseController {
 	@Autowired
 	HouseService houseService;
 	@Autowired
-	EmployeeService employeeService;
+	LoginAndRegistService lrService;
 
 	/**
 	 * 房屋列表跳转
@@ -44,17 +44,17 @@ public class HouseController {
 	 */
 	@RequestMapping("/listJson")
 	@ResponseBody
-	public JsonModel getEmpWithJson(PageModel pageModel) {
+	public JsonModel getHouseWithJson(PageModel pageModel,House hou) {
 		JsonModel jsonModel = new JsonModel();
 		// 当前查询不是一个分页查询 会查出所有的数据
 		// 引入pagehelper分页插件
 		// 在查询之前只需要调用,传入页码以及每页显示的条数
 		PageHelper.startPage(pageModel);
 		// startPage后面紧跟的查询就是一个分页的查询
-		List<House> emps = houseService.getAll();
+		List<House> houses = houseService.getAll(hou);
 		// 查询完成之后使用pageInfo对数据进行包装,只需要将Pageinfo交给页面
 		// pageInfo中就包含我了们需要的分页的信息，并且可以传入需要连续显示的页数
-		PageInfo page = new PageInfo(emps);
+		PageInfo page = new PageInfo(houses);
 		jsonModel.setData(page);
 		jsonModel.setTotal((int) page.getTotal());
 		jsonModel.setPage(page.getPageNum());
@@ -70,8 +70,8 @@ public class HouseController {
 	@RequestMapping("/createHouseView")
 	public String createEmpView(Model model) {
 		try {
-			//List<Employee> emps =employeeService.getAll();
-			//model.addAttribute("emps",emps);
+			List<LoginUser> loginUser =lrService.getAll();
+			model.addAttribute("owners",loginUser);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -89,7 +89,6 @@ public class HouseController {
 		} else {
 			try {
 				hou.setHousesId(Utils.uuid());
-				hou.setEmpId("01e0b35d2f");
 				houseService.insertOneHouse(hou);
 				jsonModel.setInfo("新增成功！");
 				jsonModel.setCode(0);

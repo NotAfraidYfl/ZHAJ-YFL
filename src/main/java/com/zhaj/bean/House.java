@@ -38,16 +38,19 @@ public class House {
 	private Integer houType;
 	// 房屋类型 0 --二手房 1 --出租房
 	private Integer houCatg;
-	// 负责员工Id
-	private String empId;
+	// 房主id
+	private String houseOwnerId;
+	//查出拥有者信息
+	private LoginUser loginUser;
 	// 房屋状态
 	private Integer houStatus;
+	
 
 	// 生成有参构造器
 	public House(String housesId, String houOwner, String ownerTel, String houProvince, String houCity,
 			String houDistrict, String houDetail, String houDescription, String owenerEmail, String houPhotos,
 			Float houPrice, Date putDate, Integer houFloor, Integer totalFloors, Integer houType, Integer houCatg,
-			String empId, Integer houStatus) {
+			String houseOwnerId, Integer houStatus) {
 		super();
 		this.housesId = housesId;
 		this.houOwner = houOwner;
@@ -65,7 +68,7 @@ public class House {
 		this.totalFloors = totalFloors;
 		this.houType = houType;
 		this.houCatg = houCatg;
-		this.empId = empId;
+		this.houseOwnerId = houseOwnerId;
 		this.houStatus = houStatus;
 	}
 
@@ -201,12 +204,12 @@ public class House {
 		this.houCatg = houCatg;
 	}
 
-	public String getEmpId() {
-		return empId;
+	public String getHouseOwnerId() {
+		return houseOwnerId;
 	}
 
-	public void setEmpId(String empId) {
-		this.empId = empId == null ? null : empId.trim();
+	public void setHouseOwnerId(String houseOwnerId) {
+		this.houseOwnerId = houseOwnerId == null ? null : houseOwnerId.trim();
 	}
 
 	public Integer getHouStatus() {
@@ -215,5 +218,13 @@ public class House {
 
 	public void setHouStatus(Integer houStatus) {
 		this.houStatus = houStatus;
+	}
+
+	public LoginUser getLoginUser() {
+		return loginUser;
+	}
+
+	public void setLoginUser(LoginUser loginUser) {
+		this.loginUser = loginUser;
 	}
 }
