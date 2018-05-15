@@ -43,6 +43,12 @@ public class LoginAndRegist {
 		return jsonModel;
 	}
 
+	/**
+	 * µÇÂ½½Ó¿Ú
+	 * @param loginUserParam
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping("login")
 	public String login(LoginUser loginUserParam, HttpServletRequest request) {
 		try {

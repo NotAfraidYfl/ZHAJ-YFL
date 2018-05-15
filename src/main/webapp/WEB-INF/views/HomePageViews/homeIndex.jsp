@@ -42,20 +42,16 @@
 			<ul class="rslides" id="slider">
 				<div class="slid banner1">
 					<div class="caption">
-						<h3>1400 Anastasia Avenue</h3>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-							Donec nec pellentesque ex. Morbi iaculis mi in varius auctor.
-							Nullam feugiat erat .</p>
-						<a href="#" class="button">know more</a>
+						<h3>24000/㎡ 环球中心</h3>
+						<p>该房源近地铁，环球中心，处于繁华并且经济高速发展的高新区中心 .</p>
+						<a href="#" class="button">了解更多</a>
 					</div>
 				</div>
 				<div class="slid banner2">
 					<div class="caption">
-						<h3>Oakland, NJ94605</h3>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-							Donec nec pellentesque ex. Morbi iaculis mi in varius auctor.
-							Nullam feugiat erat .</p>
-						<a href="#" class="button">know more</a>
+						<h3>2500/月, 单套出租</h3>
+						<p>套一出租，单身公寓，适合上班族，小区环境优雅.</p>
+						<a href="#" class="button">了解更多</a>
 					</div>
 				</div>
 				<div class="slid banner3">
