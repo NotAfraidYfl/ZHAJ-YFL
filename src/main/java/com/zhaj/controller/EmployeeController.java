@@ -45,7 +45,6 @@ public class EmployeeController {
 	@ResponseBody
 	public JsonModel getEmpWithJson(PageModel pageModel,Employee emp,HttpServletRequest req) {
 		JsonModel jsonModel = new JsonModel();
-		// 当前查询不是一个分页查询 会查出所有的数据
 		// 引入pagehelper分页插件
 		// 在查询之前只需要调用,传入页码以及每页显示的条数
 		PageHelper.startPage(pageModel);
