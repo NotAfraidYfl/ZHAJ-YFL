@@ -39,7 +39,7 @@
 								<label class="text-right">员工ID：</label> <input name="name" type="text" class=" form-control" placeholder="请输入公司名称" value="">
 							</div>
 							<div class="btn-group pull-right">
-								<button class="btn btn-default" type="button" onclick="createEmp();">
+								<button class="btn btn-default" type="button" onclick="createHouse();">
 								<i class="glyphicon glyphicon-plus"></i>创 建
 							</button>
 								<button class="btn btn-default" type="button" onclick="page(1);">
@@ -63,11 +63,12 @@
 					<thead>
 						<tr>
 							<th class="text-center">序号</th>
-							<th class="text-center">姓名</th>
-							<th class="text-center">电话</th>
-							<th class="text-center">性别</th>
-							<th class="text-center">邮箱</th>
-							<th class="text-center">部门</th>
+							<th class="text-center">房东姓名</th>
+							<th class="text-center">房东电话</th>
+							<th class="text-center">房源地址</th>
+							<th class="text-center">发布日期</th>
+							<th class="text-center">房源类型</th>
+							<th class="text-center">房源详情</th>
 							<th class="text-center">操作</th>
 						</tr>
 					</thead>
@@ -95,7 +96,7 @@
 				});
 			});
 
-			//请求员工列表的数据的ajax
+			//请求房源列表的数据的ajax
 			$.ajax({
 				type : "GET",
 				url : "${ctx}/house/listJson.do",

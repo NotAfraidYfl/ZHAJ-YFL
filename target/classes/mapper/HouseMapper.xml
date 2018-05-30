@@ -22,7 +22,7 @@
 		<result column="hou_status" jdbcType="INTEGER" property="houStatus" />
 	</resultMap>
 
-	<resultMap id="BaseResultWithLiginUserMap" type="com.zhaj.bean.House">
+	<resultMap id="BaseResultWithLoginUserMap" type="com.zhaj.bean.House">
 		<id column="houses_id" jdbcType="VARCHAR" property="housesId" />
 		<result column="hou_owner" jdbcType="VARCHAR" property="houOwner" />
 		<result column="owner_tel" jdbcType="VARCHAR" property="ownerTel" />
@@ -139,7 +139,7 @@
 	</select>
 	
 	<select id="selectHousesByFields" parameterType="com.zhaj.bean.House"
-		resultMap="BaseResultWithLiginUserMap">
+		resultMap="BaseResultWithLoginUserMap">
 		select
 		<include refid="Base_Column_List" />
 		from tb_houses h

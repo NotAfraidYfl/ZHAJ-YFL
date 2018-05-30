@@ -28,8 +28,7 @@ public class House {
 	// 租赁或者出售价格
 	private Float houPrice;
 	// 发布时间
-	@DateTimeFormat(pattern="yyyy-MM-dd")
-	private Date putDate;
+	private String putDate;
 	// 房屋所在楼层
 	private Integer houFloor;
 	// 房屋总楼层
@@ -49,7 +48,7 @@ public class House {
 	// 生成有参构造器
 	public House(String housesId, String houOwner, String ownerTel, String houProvince, String houCity,
 			String houDistrict, String houDetail, String houDescription, String owenerEmail, String houPhotos,
-			Float houPrice, Date putDate, Integer houFloor, Integer totalFloors, Integer houType, Integer houCatg,
+			Float houPrice, String putDate, Integer houFloor, Integer totalFloors, Integer houType, Integer houCatg,
 			String houseOwnerId, Integer houStatus) {
 		super();
 		this.housesId = housesId;
@@ -164,11 +163,11 @@ public class House {
 		this.houPrice = houPrice;
 	}
 
-	public Date getPutDate() {
+	public String getPutDate() {
 		return putDate;
 	}
 
-	public void setPutDate(Date putDate) {
+	public void setPutDate(String putDate) {
 		this.putDate = putDate;
 	}
 

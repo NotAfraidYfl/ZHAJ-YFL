@@ -16,8 +16,6 @@
 <script type="text/jscript"
 	src="${ctx}/static/jsFramework/bootstrap-select.js"></script>
 <!-- 引入Layer时间选择器 -->
-
-
 <style>
 .dropdown-menu>li>a {
 	display: block;
@@ -80,8 +78,8 @@
 				</div>
 				<div class="form-group valid_cow col-xs-6">
 					<label class="col-xs-4">图片路径：</label> <input type="text"
-						class="form-control input-width-200" name="houPhotos"
-						placeholder="请输入发布时间" value="">
+						class="form-control input-width-200" name="houPhotos" id="houseImgUrl"
+						placeholder="请输入发布时间" value=""><button type="button" id="imgUpload" onclick="openImgSelect()" class="btn btn-default">上传</button>
 				</div>
 				<div class="form-group valid_cow col-xs-6">
 					<label class="col-xs-4">所在楼层：</label> <input type="text"
@@ -162,6 +160,20 @@
 			});
 
 		})
+		
+		var openImgSelect=function(){
+			open("房源图片", "${ctx}/house/houImgUploadView.do",
+					[ '900px', '600px' ], function(index, layero) {
+						//这里面写点击确定后的回调方法
+						var body = top.layer.getChildFrame('body', index);
+						var iframeWin = top[layero.find('iframe')[0]['name']];
+						var imgUrl=body.find("#hideHouseImgUrl").val();
+						$("#houseImgUrl").val(imgUrl);
+						alert("111");
+						console.log("操作成功");
+					});
+			
+		}
 	</script>
 
 </body>

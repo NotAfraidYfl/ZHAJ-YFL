@@ -102,7 +102,7 @@
 		SELECT
 		<include refid="withDept_Colum_list" />
 		FROM tb_emp e
-		LEFT JOIN tb_dept d ON e.d_id = d.dept_id
+		INNER JOIN tb_dept d ON e.d_id = d.dept_id
 		<where>
 			<if test="empId != null">
 				emp_id = #{empId,jdbcType=VARCHAR}
@@ -137,7 +137,7 @@
 		</if>
 		<include refid="withDept_Colum_list" />
 		from tb_emp e
-		LEFT JOIN tb_dept d ON e.d_id = d.dept_id
+		INNER JOIN tb_dept d ON e.d_id = d.dept_id
 		<if test="_parameter != null">
 			<include refid="Example_Where_Clause" />
 		</if>

@@ -63,7 +63,6 @@ public class HouseController {
 
 	/**
 	 * 新增房源
-	 * 
 	 * @param emp
 	 * @return
 	 */
@@ -98,6 +97,21 @@ public class HouseController {
 			}
 		}
 		return jsonModel;
+	}
+	
+	/**
+	 * @param 图片上传页面
+	 * @return
+	 */
+	@RequestMapping("/houImgUploadView")
+	public String openHouImgUploadView(Model model) {
+		try {
+			List<LoginUser> loginUser =lrService.getAll();
+			model.addAttribute("owners",loginUser);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "HouseViews/houImgUploadView";
 	}
 
 }

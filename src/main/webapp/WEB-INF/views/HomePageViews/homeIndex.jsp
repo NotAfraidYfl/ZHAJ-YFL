@@ -76,7 +76,7 @@
 				<h2>find your place</h2>
 				<div class="place-grids">
 					<div class="col-md-3 place-grid">
-						<h5>all location${sessionScope.loginUser}222${session.loginUser}</h5>
+						<h5>all location${sessionScope.loginUser}${session.loginUser}</h5>
 						<select class="sel">
 							<option value="">All Locations</option>
 							<option value="">New Jersey</option>

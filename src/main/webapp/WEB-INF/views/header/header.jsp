@@ -71,13 +71,13 @@
 						aria-haspopup="true" aria-expanded="false">仓库 <span
 							class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="2columnsgallery.html">2 Columns Gallery</a></li>
-							<li><a href="3columnsgallery.html">3 Columns Gallery</a></li>
-							<li><a href="4columnsgallery.html">4 Columns Gallery</a></li>
+							<li><a href="${ctxStatic}/html/2columnsgallery.html">2 Columns Gallery</a></li>
+							<li><a href="${ctxStatic}/html/3columnsgallery.html">3 Columns Gallery</a></li>
+							<li><a href="${ctxStatic}/html/4columnsgallery.html">4 Columns Gallery</a></li>
 						</ul></li>
-					<li onclick="navLocated(this,4)"><a href="blog.html">空间</a></li>
-					<li onclick="navLocated(this,5)"><a href="codes.html">代码</a></li>
-					<li onclick="navLocated(this,6)"><a href="contact.html">联系我们</a>
+					<li onclick="navLocated(this,4)"><a href="${ctxStatic}/html/blog.html">空间</a></li>
+					<li onclick="navLocated(this,5)"><a href="${ctxStatic}/html/codes.html">代码</a></li>
+					<li onclick="navLocated(this,6)"><a href="${ctxStatic}/html/contact.html">联系我们</a>
 					</li>
 				</ul>
 				<c:if test="${not empty sessionScope.loginUser.userId}">

@@ -24,7 +24,7 @@
 							</div>
 							<div class="form-inline col-xs-2">
 								<label for="exampleInputFile">所属部门：</label>
-								<select class="form-control" name="d_id">
+								<select class="form-control" name="dId">
 									<option value="">不限</option>
 								</select>
 							</div>
@@ -92,7 +92,7 @@
 							optionString += "<option value='" + depList[i].deptId + "'>" +
 								depList[i].deptName + "</option>";
 						}
-						$("select[name='d_id']").append(optionString);
+						$("select[name='dId']").append(optionString);
 					}
 				});
 
